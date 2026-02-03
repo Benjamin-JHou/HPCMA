@@ -1,0 +1,137 @@
+Table,Column,Description,Data_Type,Example_Values,Units,Source
+hypertension_atlas_master_table.csv,Gene,HGNC gene symbol,String,ACE NOS3 UMOD,NA,MR+Coloc
+csvhypertension_atlas_master_table.csv,Disease,Target comorbidity disease,String,"CAD Stroke CKD T2D Depression AD",NA,Clinical Ontology
+hypertension_atlas_master_table.csv,MR_Beta,Mendelian randomization effect size,Float,-0.523 to 0.891,Log odds ratio,TwoSampleMR
+hypertension_atlas_master_table.csv,PPH4,Colocalization posterior probability H4,Float,0.000 to 1.000,Probability,coloc
+hypertension_atlas_master_table.csv,CellType,Disease-relevant cell type,String,Endothelial Podocyte Cardiomyocyte,NA,Single-cell atlas
+hypertension_atlas_master_table.csv,Tissue,Anatomical tissue location,String,Kidney Heart Brain,NA,GTEx v8
+hypertension_atlas_master_table.csv,Mechanism_Axis,Biological pathway category,String,Vascular Tone Renal Salt Cardiac Natriuretic,NA,Manual curation
+hypertension_atlas_master_table.csv,Clinical_Risk_Link,Clinical association description,String,Blood pressure regulation Cardiac remodeling,NA,Literature
+hypertension_atlas_master_table.csv,Clinical_Intervention,Recommended clinical intervention,String,ACE inhibitors ARBs Diuretics,NA,Clinical guidelines
+hypertension_atlas_master_table.csv,Is_Top_Predictor,Whether gene is top predictive feature,Boolean,TRUE FALSE,NA,Feature importance
+hypertension_atlas_master_table.csv,Priority_Score,Composite evidence score,Float,0.0 to 100.0,Score,Weighted combination
+hypertension_atlas_master_table.csv,Total_Influence,Cross-disease influence metric,Float,0.0 to 50.0,Count,Network analysis
+prioritized_causal_genes.csv,Gene,HGNC gene symbol,String,ACE AGT EDN1,NA,MR+Coloc
+csvprioritized_causal_genes.csv,MR_Support,Mendelian randomization evidence,Boolean,TRUE FALSE,NA,TwoSampleMR
+prioritized_causal_genes.csv,Coloc_Support,Colocalization evidence,Boolean,TRUE FALSE,NA,coloc
+prioritized_causal_genes.csv,eQTL_Support,Expression QTL evidence,Boolean,TRUE FALSE,NA,GTEx v8
+prioritized_causal_genes.csv,Priority_Score,Composite prioritization score,Float,0.0 to 100.0,Score,Weighted sum
+prioritized_causal_genes.csv,Tier,Evidence confidence tier,Integer,1 2 3,NA,Manual curation
+prioritized_causal_genes.csv,Associated_Traits,Comma-separated associated traits,String,SBP CAD CKD,NA,GWAS catalog
+prioritized_causal_genes.csv,Top_eQTL_SNP,Strongest eQTL variant,String,rs699 rs1799983,NA,GTEx v8
+prioritized_causal_genes.csv,eQTL_Tissues,Tissues with significant eQTL,String,Liver Kidney Heart,NA,GTEx v8
+gene_disease_celltype_annotation.csv,Gene,HGNC gene symbol,String,ACE NOS3,NA,Prioritized genes
+csvgene_disease_celltype_annotation.csv,Tissue,Anatomical tissue,String,Heart Kidney Brain,NA,GTEx v8
+gene_disease_celltype_annotation.csv,CellType,Specific cell type,String,Endothelial Podocyte Neuron,NA,Single-cell RNA-seq
+gene_disease_celltype_annotation.csv,MeanExpr,Mean expression level in cell type,Float,0.0 to 100.0,TPM,Single-cell atlas
+gene_disease_celltype_annotation.csv,Specificity_Score,Cell type specificity metric,Float,0.0 to 1.0,Score,Tau-like metric
+gene_disease_celltype_annotation.csv,Is_Disease_Relevant,Whether cell type is disease-relevant,Boolean,TRUE FALSE,NA,Manual curation
+gene_disease_celltype_annotation.csv,Disease_Role,Functional role in disease,String,Blood pressure regulation Salt handling,NA,Literature
+gene_disease_celltype_annotation.csv,Mechanism,Biological mechanism description,String,Vasoconstriction Sodium transport,NA,Pathway analysis
+clinical_translation_table.csv,Gene,HGNC gene symbol,String,ACE AGT,NA,Prioritized genes
+clinical_translation_table.csv,Risk_Factor,Modifiable risk factor,String,Blood pressure Albuminuria,NA,Clinical
+csvclinical_translation_table.csv,Pathway,Biological pathway,String,RAAS Renin-angiotensin,NA,KEGG/Reactome
+clinical_translation_table.csv,Clinical_Intervention,Clinical intervention,String,ACE inhibitors Lifestyle modification,NA,Clinical guidelines
+clinical_translation_table.csv,Evidence_Level,Evidence quality rating,String,High Moderate Low,NA,GRADE system
+clinical_translation_table.csv,BP_Effect,Effect on blood pressure,String,Decrease 10-15 mmHg,NA,Clinical trials
+clinical_translation_table.csv,Comorbidity_Benefit,Additional disease benefits,String,CKD protection Heart failure,NA,Literature
+clinical_translation_table.csv,Monitoring,Recommended monitoring,String,Serum creatinine Potassium,NA,Clinical guidelines
+mechanism_axis_clusters.csv,Gene,HGNC gene symbol,String,ACE EDN1 NOS3,NA,Tier 1-2 genes
+csvmechanism_axis_clusters.csv,Mechanism_Axis,Biological pathway axis,String,Vascular Tone Renal Salt Cardiac Natriuretic,NA,Manual curation
+mechanism_axis_clusters.csv,CellType,Associated cell type,String,Endothelial Podocyte Cardiomyocyte,NA,Single-cell atlas
+mechanism_axis_clusters.csv,Mechanism_Score,Confidence score for axis assignment,Float,0.0 to 1.0,Score,Weighted evidence
+mechanism_axis_clusters.csv,Axis_Description,Detailed axis description,String,Blood pressure regulation via vascular tone,NA,Manual curation
+mechanism_axis_clusters.csv,Biological_Mechanism,Detailed biological mechanism,String,Nitric oxide signaling Angiotensin II,NA,Pathway analysis
+multilayer_network_edges.csv,Layer,Network layer type,String,Gene_Disease Gene_Cell Cell_Disease,NA,Network analysis
+multilayer_network_edges.csv,Source,Source node,String,ACE CAD,NA,Network node
+multilayer_network_edges.csv,Target,Target node,String,CAD Endothelial,NA,Network node
+multilayer_network_edges.csv,Weight,Edge strength,Float,0.0 to 1.0,Score,Evidence-based
+multilayer_network_edges.csv,MR_Beta,Mendelian randomization effect,Float,-2.0 to 2.0,Log odds,TwoSampleMR
+multilayer_network_edges.csv,PPH4,Colocalization probability,Float,0.0 to 1.0,Probability,coloc
+multilayer_network_edges.csv,Evidence_Type,Type of supporting evidence,String,MR Coloc Both,NA,Method
+multilayer_network_edges.csv,CellType,Associated cell type (if applicable),String,Endothelial Podocyte,NA,Single-cell
+multilayer_network_edges.csv,Tissue,Associated tissue (if applicable),String,Kidney Heart,NA,GTEx
+multilayer_network_edges.csv,Specificity,Cell type specificity score,Float,0.0 to 1.0,Score,Single-cell analysis
+multilayer_network_edges.csv,Tau,Tissue specificity index,Float,0.0 to 1.0,Score,GTEx v8
+multimodal_risk_score.csv,Sample_ID,Patient identifier,String,Sample_001 Sample_002,NA,Cohort
+multimodal_risk_score.csv,AD,Alzheimer disease risk probability,Float,0.0 to 1.0,Probability,XGBoost ensemble
+csvmultimodal_risk_score.csv,CAD,Coronary artery disease risk probability,Float,0.0 to 1.0,Probability,XGBoost ensemble
+multimodal_risk_score.csv,CKD,Chronic kidney disease risk probability,Float,0.0 to 1.0,Probability,XGBoost ensemble
+multimodal_risk_score.csv,Depression,Major depressive disorder risk probability,Float,0.0 to 1.0,Probability,XGBoost ensemble
+multimodal_risk_score.csv,Stroke,Stroke risk probability,Float,0.0 to 1.0,Probability,XGBoost ensemble
+multimodal_risk_score.csv,T2D,Type 2 diabetes risk probability,Float,0.0 to 1.0,Probability,XGBoost ensemble
+cross_disease_gene_influence_score.csv,Gene,HGNC gene symbol,String,ACE NOS3,NA,Prioritized genes
+cross_disease_gene_influence_score.csv,Total_Influence_Score,Sum of influence across diseases,Float,0.0 to 50.0,Score,Network analysis
+cross_disease_gene_influence_score.csv,Mechanism_Axis,Primary biological pathway,String,Vascular Tone Renal Salt,NA,Manual curation
+cross_disease_gene_influence_score.csv,Top_CellType,Most relevant cell type,String,Endothelial Podocyte,NA,Single-cell
+cross_disease_gene_influence_score.csv,N_Diseases_Involved,Number of associated diseases,Integer,1 to 6,Count,Master table
+cross_disease_gene_influence_score.csv,Disease_Contributions,Per-disease contribution scores,String,CAD:0.85 CKD:0.72,Score list,Network analysis
+coloc_results.csv,Gene,HGNC gene symbol,String,ACE SHROOM3,NA,Tier 1-2 genes
+csvcoloc_results.csv,Trait1,First trait in colocalization,String,SBP CAD,NA,GWAS
+coloc_results.csv,Trait2,Second trait in colocalization,String,CAD CKD,NA,GWAS
+coloc_results.csv,CHR,Chromosome number,Integer,1 to 22,Chromosome,GWAS
+coloc_results.csv,PPH4,Posterior probability H4 (shared causal variant),Float,0.0 to 1.0,Probability,coloc
+coloc_results.csv,Coloc_Support,Whether colocalization is significant,Boolean,TRUE FALSE,NA,PPH4 > 0.7
+mr_causal_results.csv,Exposure,Exposure trait,String,SBP DBP PP,NA,GWAS
+mr_causal_results.csv,Outcome,Outcome trait,String,CAD Stroke CKD,NA,GWAS
+mr_causal_results.csv,Method,MR analysis method,String,Wald_ratio Inverse_variance_weighted Egger,NA,TwoSampleMR
+mr_causal_results.csv,Beta,Effect size estimate,Float,-2.0 to 2.0,Log odds,TwoSampleMR
+mr_causal_results.csv,SE,Standard error,Float,0.0 to 1.0,Log odds,TwoSampleMR
+mr_causal_results.csv,P,P-value for causal effect,Float,0.0 to 1.0,Probability,TwoSampleMR
+mr_causal_results.csv,IV_number,Number of genetic instruments,Integer,1 to 100,Count,Clumping
+mr_causal_results.csv,F_stat_mean,Mean F-statistic for instruments,Float,10.0 to 500.0,F-stat,Instrument strength
+mr_significant_pairs.csv,Exposure,Exposure trait,String,SBP DBP,NA,GWAS
+mr_significant_pairs.csv,Outcome,Outcome trait,String,CAD Stroke,NA,GWAS
+mr_significant_pairs.csv,Beta,Effect size estimate,Float,-2.0 to 2.0,Log odds,TwoSampleMR
+mr_significant_pairs.csv,SE,Standard error,Float,0.0 to 1.0,Log odds,TwoSampleMR
+mr_significant_pairs.csv,P,P-value for causal effect,Float,0.0 to 0.05,Probability,TwoSampleMR
+mr_significant_pairs.csv,IV_number,Number of genetic instruments,Integer,1 to 100,Count,Clumping
+mr_significant_pairs.csv,F_stat_mean,Mean F-statistic,Float,10.0 to 500.0,F-stat,Instrument strength
+mr_significant_pairs.csv,Strong_Causal,Whether evidence is strong causal,Boolean,TRUE FALSE,NA,F>10 & P<0.05
+eqtl_supported_genes.csv,Gene,HGNC gene symbol,String,ACE NOS3,NA,Prioritized genes
+eqtl_supported_genes.csv,Top_SNP,Strongest eQTL SNP,String,rs699 rs1799983,NA,GTEx v8
+eqtl_supported_genes.csv,eQTL_Tissues,Tissues with eQTL support,String,Artery_Aorta Heart_Left_Ventricle,NA,GTEx v8
+eqtl_supported_genes.csv,eQTL_P,eQTL p-value,Float,0.0 to 1.0,Probability,GTEx v8
+eqtl_supported_genes.csv,eQTL_Support,Whether eQTL evidence exists,Boolean,TRUE FALSE,NA,GTEx v8
+eqtl_supported_genes.csv,GTEx_v8,GTEx version 8 support status,Boolean,TRUE,NA,GTEx v8
+drug_target_enrichment_results.csv,Gene_Set,Gene set category,String,Tier_1_All Tier_2_Causal,NA,Manual curation
+drug_target_enrichment_results.csv,Total_Genes,Number of genes in set,Integer,1 to 100,Count,Set size
+drug_target_enrichment_results.csv,Approved_Drug_Targets,Number of approved drug targets,Integer,0 to 50,Count,DrugBank
+drug_target_enrichment_results.csv,Enrichment_Ratio,Fold enrichment for drug targets,Float,0.0 to 10.0,Ratio,Fisher test
+drug_target_enrichment_results.csv,P_Value,Enrichment p-value,Float,0.0 to 1.0,Probability,Fisher test
+drug_target_enrichment_results.csv,Significant,Whether enrichment is significant,Boolean,TRUE FALSE,NA,P < 0.05
+drug_target_enrichment_results.csv,Interpretation,Clinical interpretation,String,High druggability Moderate potential,NA,Expert curation
+feature_importance_all_models.csv,Disease,Target disease,String,CAD Stroke CKD,NA,Cohort
+feature_importance_all_models.csv,Model,ML model type,String,XGBoost RandomForest LogisticRegression,NA,Scikit-learn
+feature_importance_all_models.csv,Feature,Input feature name,String,PRS_SBP Age BMI,NA,Cohort
+feature_importance_all_models.csv,Importance,Feature importance score,Float,0.0 to 1.0,Score,Model-specific
+model_performance_summary.csv,Disease,Target disease,String,CAD Stroke CKD T2D Depression AD,NA,Cohort
+model_performance_summary.csv,Model,ML model type,String,XGBoost RandomForest LogisticRegression,NA,Scikit-learn
+model_performance_summary.csv,AUC_mean,Mean AUC across CV folds,Float,0.5 to 1.0,AUC,5-fold CV
+model_performance_summary.csv,AUC_std,Standard deviation of AUC,Float,0.0 to 0.1,AUC,5-fold CV
+model_performance_summary.csv,Accuracy_mean,Mean accuracy,Float,0.0 to 1.0,Accuracy,5-fold CV
+model_performance_summary.csv,Accuracy_std,Standard deviation of accuracy,Float,0.0 to 0.1,Accuracy,5-fold CV
+model_performance_summary.csv,F1_mean,Mean F1 score,Float,0.0 to 1.0,F1,5-fold CV
+model_performance_summary.csv,F1_std,Standard deviation of F1,Float,0.0 to 0.1,F1,5-fold CV
+model_performance_summary.csv,PR_AUC_mean,Mean precision-recall AUC,Float,0.0 to 1.0,AUC,5-fold CV
+model_performance_summary.csv,PR_AUC_std,Standard deviation of PR-AUC,Float,0.0 to 0.1,AUC,5-fold CV
+ldsc_genetic_correlation_matrix.csv,Trait1,First trait,String,SBP CAD T2D,NA,GWAS
+ldsc_genetic_correlation_matrix.csv,Trait2,Second trait,String,CAD T2D AD,NA,GWAS
+ldsc_genetic_correlation_matrix.csv,rg,Genetic correlation estimate,Float,-1.0 to 1.0,Correlation,LDSC
+ldsc_genetic_correlation_matrix.csv,SE,Standard error of rg,Float,0.0 to 0.5,Correlation,LDSC
+ldsc_genetic_correlation_matrix.csv,Z,Z-score for rg,Float,-10.0 to 10.0,Z-score,LDSC
+ldsc_genetic_correlation_matrix.csv,P,P-value for rg,Float,0.0 to 1.0,Probability,LDSC
+atlas_stability_bootstrap.csv,Gene,HGNC gene symbol,String,ACE NOS3,NA,Tier 1-2 genes
+atlas_stability_bootstrap.csv,Original_Mechanism_Axis,Assigned mechanism axis,String,Vascular Tone Renal Salt,NA,Original
+atlas_stability_bootstrap.csv,Bootstrap_Consistency,Consistency across bootstrap samples,Float,0.0 to 100.0,Percent,Bootstrap
+atlas_stability_bootstrap.csv,Stability_Category,Stability classification,String,High Moderate Low,NA,Bootstrap threshold
+atlas_stability_bootstrap.csv,Interpretation,Stability interpretation,String,Highly stable axis assignment,NA,Expert curation
+final_dataset_manifest.csv,Trait,Phenotype trait,String,SBP CAD T2D,NA,GWAS catalog
+final_dataset_manifest.csv,Dataset_ID,Dataset identifier,String,ieu-a-123 GCST006001,NA,IEU OpenGWAS
+final_dataset_manifest.csv,Source,Data source,String,UK_Biobank FinnGen,NA,Cohort
+final_dataset_manifest.csv,Sample_Size,Number of samples,Integer,10000 to 1000000,Individuals,GWAS
+final_dataset_manifest.csv,Ancestry,Genetic ancestry,String,European Multi-ancestry,NA,GWAS
+final_dataset_manifest.csv,Genome_Build,Reference genome,String,GRCh37 GRCh38,NA,GWAS
+final_dataset_manifest.csv,SNP_Count_PostQC,Post-QC SNP count,Integer,500000 to 10000000,SNPs,QC
+final_dataset_manifest.csv,File_Path,Path to harmonized data,String,../data/ieu_opengwas/,NA,Local
+final_dataset_manifest.csv,QC_Passed,Whether dataset passed QC,Boolean,TRUE FALSE,NA,QC metrics
