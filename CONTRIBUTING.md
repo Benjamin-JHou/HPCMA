@@ -1,6 +1,8 @@
-# Contributing to MMRP Clinical AI
+# Contributing to HPCMA
 
-First off, thank you for considering contributing to the Hypertension Pan-Comorbidity Multi-Modal Risk Prediction project! It's people like you that make this research possible.
+First off, thank you for considering contributing to the Hypertension Pan-Comorbidity Multi-Modal Atlas (HPCMA) project! It's people like you that advance precision medicine research.
+
+**Repository:** https://github.com/Benjamin-JHou/HPCMA
 
 ## Code of Conduct
 
@@ -38,8 +40,8 @@ Enhancement suggestions are tracked as GitHub issues. When creating an enhanceme
 1. Fork the repository
 2. Clone your fork:
    ```bash
-   git clone https://github.com/Benjamin-JHou/MMRP-Clinical-AI.git
-   cd MMRP-Clinical-AI
+   git clone https://github.com/Benjamin-JHou/HPCMA.git
+   cd HPCMA
    ```
 3. Create a virtual environment:
    ```bash

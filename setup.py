@@ -1,5 +1,5 @@
 """
-Setup script for MMRP Clinical AI package
+Setup script for Hypertension Pan-Comorbidity Multi-Modal Atlas (HPCMA)
 """
 
 from setuptools import setup, find_packages
@@ -11,14 +11,14 @@ with open("requirements.txt", "r", encoding="utf-8") as fh:
     requirements = [line.strip() for line in fh if line.strip() and not line.startswith("#")]
 
 setup(
-    name="mmrp-clinical-ai",
+    name="hpcma",
     version="1.0.0",
     author="Benjamin-JHou",
     author_email="",
-    description="Multi-Modal Risk Prediction for Hypertension Comorbidities",
+    description="Hypertension Pan-Comorbidity Multi-Modal Atlas: Genomic-clinical resource for end-organ risk prediction",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/Benjamin-JHou/MMRP-Clinical-AI",
+    url="https://github.com/Benjamin-JHou/HPCMA",
     packages=find_packages(where="src"),
     package_dir={"": "src"},
     classifiers=[
@@ -32,6 +32,7 @@ setup(
         "Programming Language :: Python :: 3.11",
         "Topic :: Scientific/Engineering :: Medical Science Apps.",
         "Topic :: Scientific/Engineering :: Artificial Intelligence",
+        "Topic :: Scientific/Engineering :: Bio-Informatics",
     ],
     python_requires=">=3.9",
     install_requires=requirements,
@@ -49,7 +50,7 @@ setup(
     },
     entry_points={
         "console_scripts": [
-            "mmrp-inference=src.inference.api_server:main",
+            "hpcma-inference=src.inference.api_server:main",
         ],
     },
     include_package_data=True,
