@@ -10,6 +10,7 @@ on:
 permissions:
   contents: read
   actions: read
+  security-events: write  # Required for CodeQL/SARIF uploads
 
 jobs:
   test:
@@ -93,6 +94,8 @@ jobs:
   security-scan:
     runs-on: ubuntu-latest
     continue-on-error: true  # Allow workflow to continue even if scan finds issues
+    # Skip on PRs from forks due to permission restrictions
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
     permissions:
       actions: read
       contents: read
