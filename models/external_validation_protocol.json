@@ -1,0 +1,138 @@
+{
+  "protocol_title": "External Validation Protocol for HC-RS Multi-Modal Risk Prediction",
+  "version": "1.0",
+  "objective": "Validate model performance in independent cohorts",
+  "validation_type": "External temporal and geographic validation",
+  "required_datasets": {
+    "minimum_requirements": {
+      "sample_size_per_disease": 1000,
+      "total_samples": 5000,
+      "follow_up_duration": "5 years minimum",
+      "event_rate": "At least 5% incidence per disease"
+    },
+    "data_format": {
+      "file_format": "CSV or TSV",
+      "required_columns": [
+        "patient_id",
+        "age",
+        "sex",
+        "bmi",
+        "hypertension_status",
+        "smoking_status",
+        "salt_intake_g_per_day",
+        "physical_activity_min_per_week",
+        "prs_sbp",
+        "prs_dbp",
+        "prs_pp",
+        "cad_outcome",
+        "stroke_outcome",
+        "ckd_outcome",
+        "t2d_outcome",
+        "depression_outcome",
+        "ad_outcome",
+        "follow_up_time_years"
+      ],
+      "outcome_coding": {
+        "0": "No event",
+        "1": "Event occurred",
+        "NA": "Lost to follow-up"
+      },
+      "prs_format": "Z-scores (standardized)",
+      "missing_data": "<10% per variable"
+    }
+  },
+  "validation_procedures": {
+    "step_1_preprocessing": {
+      "name": "Data Harmonization",
+      "tasks": [
+        "Standardize PRS scores to training distribution",
+        "Impute missing values (<5% allowed)",
+        "Apply same feature scaling as training",
+        "Validate data quality and completeness"
+      ]
+    },
+    "step_2_inference": {
+      "name": "Model Inference",
+      "tasks": [
+        "Load serialized models",
+        "Run batch inference on validation cohort",
+        "Generate risk scores for all diseases",
+        "Calculate MMRS for each patient"
+      ],
+      "script": "python models/inference_pipeline.py --mode batch --input validation_cohort.csv --output validation_results.csv"
+    },
+    "step_3_evaluation": {
+      "name": "Performance Evaluation",
+      "metrics": {
+        "primary": [
+          "AUC-ROC",
+          "Calibration slope"
+        ],
+        "secondary": [
+          "AUC-PR",
+          "Brier score",
+          "Net reclassification improvement"
+        ],
+        "clinical": [
+          "Sensitivity at 95% specificity",
+          "PPV at 10% risk threshold"
+        ]
+      },
+      "acceptable_performance": {
+        "auc_minimum": 0.65,
+        "auc_target": 0.75,
+        "calibration_slope_range": [
+          0.8,
+          1.2
+        ],
+        "decision_curve_analysis": "Required"
+      }
+    },
+    "step_4_stratification": {
+      "name": "Subgroup Analysis",
+      "subgroups": [
+        "Age groups (<55, 55-70, >70)",
+        "Sex (Male, Female)",
+        "Ethnicity (when available)",
+        "Hypertension status",
+        "BMI categories",
+        "Geographic region"
+      ],
+      "fairness_metrics": "Evaluate for each subgroup"
+    }
+  },
+  "success_criteria": {
+    "validation_passed": {
+      "description": "Model maintains acceptable performance in external cohort",
+      "criteria": [
+        "AUC \u2265 0.65 for all diseases",
+        "AUC within 0.10 of training performance",
+        "Well-calibrated (slope 0.8-1.2)",
+        "No significant bias in subgroup analyses"
+      ]
+    },
+    "validation_failed": {
+      "description": "Model performance degrades significantly",
+      "actions": [
+        "Investigate data quality issues",
+        "Assess population shift",
+        "Consider model recalibration",
+        "If persistent: model retraining required"
+      ]
+    }
+  },
+  "revalidation_schedule": {
+    "annual_validation": "Required for clinical deployment",
+    "trigger_events": [
+      "Population demographics change >20%",
+      "Treatment guidelines major update",
+      "New risk factors identified",
+      "Performance degradation alert"
+    ]
+  },
+  "documentation": {
+    "validation_report": "Include all metrics, subgroup analyses, and calibration plots",
+    "comparison_table": "Training vs validation performance side-by-side",
+    "limitations": "Document any population-specific limitations"
+  }
+}

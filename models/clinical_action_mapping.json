@@ -1,0 +1,213 @@
+{
+  "action_framework": {
+    "name": "HC-RS Clinical Action Matrix",
+    "version": "1.0",
+    "last_updated": "2026-02-03",
+    "review_cycle": "Annual"
+  },
+  "risk_to_action_mapping": {
+    "CAD": {
+      "Low": {
+        "monitoring": "Routine BP checks annually",
+        "lifestyle": "Standard heart-healthy diet",
+        "pharmacologic": "None",
+        "referral": "None",
+        "follow_up": "Annual review"
+      },
+      "Moderate": {
+        "monitoring": "BP checks every 6 months",
+        "lifestyle": "DASH diet, regular exercise",
+        "pharmacologic": "Consider statin if LDL >100",
+        "referral": "None",
+        "follow_up": "6-month review"
+      },
+      "High": {
+        "monitoring": "BP checks every 3 months, lipid panel",
+        "lifestyle": "Intensive lifestyle modification",
+        "pharmacologic": "Statin (high-intensity), consider aspirin",
+        "referral": "Cardiology referral",
+        "follow_up": "3-month review with cardiologist"
+      },
+      "Very High": {
+        "monitoring": "Monthly BP, stress test, coronary calcium score",
+        "lifestyle": "Supervised cardiac rehabilitation",
+        "pharmacologic": "Maximal medical therapy",
+        "referral": "Urgent cardiology + interventional cardiology",
+        "follow_up": "Monthly until controlled"
+      }
+    },
+    "Stroke": {
+      "Low": {
+        "monitoring": "Routine BP checks",
+        "lifestyle": "Smoking cessation if applicable",
+        "pharmacologic": "None",
+        "referral": "None",
+        "follow_up": "Annual"
+      },
+      "Moderate": {
+        "monitoring": "BP checks every 6 months",
+        "lifestyle": "Exercise program, salt restriction",
+        "pharmacologic": "Optimize antihypertensives",
+        "referral": "None",
+        "follow_up": "6-month review"
+      },
+      "High": {
+        "monitoring": "BP every 3 months, carotid screening",
+        "lifestyle": "DASH diet, supervised exercise",
+        "pharmacologic": "Dual antihypertensive, statin",
+        "referral": "Neurology referral",
+        "follow_up": "3-month review"
+      },
+      "Very High": {
+        "monitoring": "Continuous BP monitoring, TCD if indicated",
+        "lifestyle": "Intensive rehabilitation",
+        "pharmacologic": "Triple therapy, anticoagulation if indicated",
+        "referral": "Urgent neurology + stroke prevention clinic",
+        "follow_up": "Monthly monitoring"
+      }
+    },
+    "CKD": {
+      "Low": {
+        "monitoring": "Annual creatinine/eGFR, urinalysis",
+        "lifestyle": "Standard protein intake",
+        "pharmacologic": "None",
+        "referral": "None",
+        "follow_up": "Annual"
+      },
+      "Moderate": {
+        "monitoring": "Creatinine/eGFR every 6 months, UACR",
+        "lifestyle": "Moderate protein restriction, hydration",
+        "pharmacologic": "ACEi/ARB if albuminuria",
+        "referral": "Nephrology if eGFR <60",
+        "follow_up": "6-month review"
+      },
+      "High": {
+        "monitoring": "Monthly labs, 24h urine if proteinuria",
+        "lifestyle": "Low protein diet, fluid management",
+        "pharmacologic": "Maximal ACEi/ARB, SGLT2i, consider finerenone",
+        "referral": "Nephrology mandatory",
+        "follow_up": "3-month nephrology review"
+      },
+      "Very High": {
+        "monitoring": "Biweekly labs, dialysis preparation if needed",
+        "lifestyle": "Strict renal diet, fluid restriction",
+        "pharmacologic": "Full KDIGO guideline therapy",
+        "referral": "Urgent nephrology, multidisciplinary team",
+        "follow_up": "Weekly until stabilized"
+      }
+    },
+    "T2D": {
+      "Low": {
+        "monitoring": "Annual HbA1c, fasting glucose",
+        "lifestyle": "Weight management, exercise",
+        "pharmacologic": "None",
+        "referral": "None",
+        "follow_up": "Annual"
+      },
+      "Moderate": {
+        "monitoring": "HbA1c every 6 months",
+        "lifestyle": "Diabetes prevention program (DPP)",
+        "pharmacologic": "Metformin if prediabetic",
+        "referral": "Endocrinology if risk factors",
+        "follow_up": "6-month review"
+      },
+      "High": {
+        "monitoring": "HbA1c every 3 months, complication screening",
+        "lifestyle": "Intensive DPP, medical nutrition therapy",
+        "pharmacologic": "Metformin + SGLT2i or GLP1-RA",
+        "referral": "Endocrinology",
+        "follow_up": "3-month review"
+      },
+      "Very High": {
+        "monitoring": "Monthly HbA1c, continuous glucose monitoring",
+        "lifestyle": "Supervised intensive program",
+        "pharmacologic": "Triple therapy, insulin if needed",
+        "referral": "Urgent endocrinology + diabetes educator",
+        "follow_up": "Monthly until target HbA1c achieved"
+      }
+    },
+    "Depression": {
+      "Low": {
+        "monitoring": "Annual PHQ-2 screening",
+        "lifestyle": "Stress management, social engagement",
+        "pharmacologic": "None",
+        "referral": "None",
+        "follow_up": "Annual"
+      },
+      "Moderate": {
+        "monitoring": "PHQ-9 every 6 months",
+        "lifestyle": "Counseling, exercise, sleep hygiene",
+        "pharmacologic": "Consider SSRI if symptomatic",
+        "referral": "Primary care mental health",
+        "follow_up": "6-month review"
+      },
+      "High": {
+        "monitoring": "Monthly PHQ-9, suicide risk assessment",
+        "lifestyle": "Structured therapy program",
+        "pharmacologic": "SSRI/SNRI, consider augmentation",
+        "referral": "Psychiatry referral",
+        "follow_up": "Monthly with therapist"
+      },
+      "Very High": {
+        "monitoring": "Weekly assessment, 24/7 crisis line",
+        "lifestyle": "Intensive outpatient program",
+        "pharmacologic": "Combination therapy, consider ECT if severe",
+        "referral": "Urgent psychiatry + crisis intervention",
+        "follow_up": "Weekly until stabilized"
+      }
+    },
+    "AD": {
+      "Low": {
+        "monitoring": "Annual cognitive screening (MMSE/MoCA)",
+        "lifestyle": "Cognitive engagement, cardiovascular optimization",
+        "pharmacologic": "None",
+        "referral": "None",
+        "follow_up": "Annual"
+      },
+      "Moderate": {
+        "monitoring": "Cognitive testing every 6 months",
+        "lifestyle": "Mediterranean diet, physical activity",
+        "pharmacologic": "Cholinesterase inhibitors if MCI",
+        "referral": "Neurology if cognitive decline noted",
+        "follow_up": "6-month review"
+      },
+      "High": {
+        "monitoring": "Quarterly cognitive testing, functional assessment",
+        "lifestyle": "Supervised cognitive training, caregiver support",
+        "pharmacologic": "Cholinesterase inhibitors, memantine if moderate",
+        "referral": "Neurology + geriatrics",
+        "follow_up": "3-month multidisciplinary review"
+      },
+      "Very High": {
+        "monitoring": "Monthly cognitive and functional assessment",
+        "lifestyle": "24/7 supervision planning, residential care evaluation",
+        "pharmacologic": "Maximal therapy, manage behavioral symptoms",
+        "referral": "Urgent neurology + memory disorder clinic + social work",
+        "follow_up": "Monthly until care plan established"
+      }
+    }
+  },
+  "alert_thresholds": {
+    "immediate_action_required": {
+      "condition": "Any Very High risk category",
+      "response_time": "Within 24-48 hours",
+      "notification": "Provider alert + patient notification"
+    },
+    "urgent_attention": {
+      "condition": "Multiple High risk categories",
+      "response_time": "Within 1 week",
+      "notification": "Provider alert"
+    },
+    "routine_follow_up": {
+      "condition": "Moderate risk in any category",
+      "response_time": "Within 1 month",
+      "notification": "Patient portal message"
+    }
+  },
+  "patient_communication": {
+    "low_risk": "Your risk is below average. Continue healthy lifestyle.",
+    "moderate_risk": "Your risk is average. Consider lifestyle improvements.",
+    "high_risk": "Your risk is elevated. We recommend enhanced monitoring.",
+    "very_high_risk": "Your risk is significantly elevated. Urgent evaluation needed."
+  }
+}

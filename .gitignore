@@ -1,0 +1,186 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+
+# Translations
+*.mo
+*.pot
+
+# Django stuff:
+*.log
+local_settings.py
+db.sqlite3
+
+# Flask stuff:
+instance/
+.webassets-cache
+
+# Scrapy stuff:
+.scrapy
+
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+target/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# IPython
+profile_default/
+ipython_config.py
+
+# pyenv
+.python-version
+
+# celery beat schedule file
+celerybeat-schedule
+
+# SageMath parsed files
+*.sage.py
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Spyder project settings
+.spyderproject
+.spyproject
+
+# Rope project settings
+.ropeproject
+
+# mkdocs documentation
+/site
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
+
+# Data files (large files should not be committed)
+*.gwas
+*.bed
+*.bim
+*.fam
+*.pgen
+*.psam
+*.pvar
+*.bgen
+*.sscore
+*.sscore.vars
+*.sscore.gz
+*.sscore.vars.gz
+
+# Large result files
+results/*.tsv
+results/*.csv
+results/**/*.tsv
+results/**/*.csv
+!results/summary_*.csv
+!results/step*_final_*.csv
+!results/master_atlas*.csv
+
+# Raw data directories
+data/raw/
+data/working/
+data/external/
+data/variants/
+
+# Logs
+logs/*.log
+logs/**/*.log
+
+# Model files (can be large)
+models/*.pkl
+models/*.joblib
+models/*.model
+models/checkpoints/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+
+# Docker
+.dockerignore
+docker-compose.override.yml
+
+# Secrets (NEVER commit these!)
+*.pem
+*.key
+secrets/
+.env.local
+.env.*.local
+config/local*
+config/*secret*
+config/*private*

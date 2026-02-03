@@ -1,0 +1,58 @@
+# MMRP Clinical AI Configuration
+# API and Model Configuration
+
+api:
+  host: "0.0.0.0"
+  port: 8000
+  log_level: "INFO"
+  max_batch_size: 100
+  request_timeout: 30
+
+models:
+  version: "1.0.0"
+  format: "xgboost"
+  diseases:
+    - CAD
+    - Stroke
+    - CKD
+    - T2D
+    - Depression
+    - AD
+  ensemble: "weighted_average"
+  
+features:
+  genetic:
+    - sbp_prs
+    - dbp_prs
+    - pp_prs
+  clinical:
+    - age
+    - sex
+    - bmi
+    - sbp
+  environmental:
+    - smoking
+    - physical_activity
+    - diet_score
+
+risk_thresholds:
+  low: 0.15
+  moderate: 0.30
+  high: 0.45
+  very_high: 1.0
+
+mmrs_thresholds:
+  low_risk: 0.20
+  moderate_risk: 0.35
+  high_risk: 0.50
+  very_high_risk: 1.0
+
+caching:
+  enabled: true
+  ttl: 3600  # seconds
+  max_size: 1000
+
+monitoring:
+  enabled: true
+  metrics_endpoint: "/metrics"
+  health_endpoint: "/health"
