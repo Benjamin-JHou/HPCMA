@@ -1,0 +1,66 @@
+Gene,Tissue,CellType,MeanExpr,Specificity_Score,Is_Disease_Relevant,Disease_Role,Mechanism
+ACE,Heart,Cardiomyocytes,4.8,1.206,True,"Heart function, volume status","Contractility, natriuretic peptide release"
+ACE,Heart,Vascular_SMC,8.5,2.135,True,Vessel tone regulation,"Contractile tone, vascular remodeling"
+ACE,Heart,Endothelial,7.2,1.808,True,"NO signaling, barrier function","Vasodilation, inflammation, permeability"
+ACE,Heart,Fibroblasts,1.06,0.266,False,Unknown,Not characterized
+ACE,Heart,Neuronal,1.6,0.402,False,Unknown,Not characterized
+ACE,Heart,Immune_Cells,0.73,0.183,False,Unknown,Not characterized
+ACE,Kidney,Podocytes,3.5,1.748,True,CKD link - albuminuria,"Filtration barrier, injury response"
+ACE,Kidney,Proximal_Tubule,0.42,0.21,True,Salt/water reabsorption,"Sodium transport, volume regulation"
+ACE,Kidney,Loop_of_Henle,1.34,0.669,True,Counter-current concentration,Water and electrolyte handling
+ACE,Kidney,Distal_Tubule,0.47,0.235,True,Fine salt balance,Thiazide-sensitive NaCl transport
+ACE,Kidney,Collecting_Duct,0.32,0.16,True,Final urine concentration,"Water reabsorption, aldosterone response"
+ACE,Kidney,Endothelial,6.8,3.395,True,"NO signaling, barrier function","Vasodilation, inflammation, permeability"
+ACE,Kidney,Immune_Cells,1.17,0.584,False,Unknown,Not characterized
+AGT,Heart,Cardiomyocytes,0.1,0.231,True,"Heart function, volume status","Contractility, natriuretic peptide release"
+AGT,Heart,Vascular_SMC,1.2,2.769,True,Vessel tone regulation,"Contractile tone, vascular remodeling"
+AGT,Heart,Endothelial,0.53,1.223,True,"NO signaling, barrier function","Vasodilation, inflammation, permeability"
+AGT,Heart,Fibroblasts,0.1,0.231,False,Unknown,Not characterized
+AGT,Heart,Neuronal,0.3,0.692,False,Unknown,Not characterized
+AGT,Heart,Immune_Cells,0.37,0.854,False,Unknown,Not characterized
+EDN1,Heart,Cardiomyocytes,1.6,0.398,True,"Heart function, volume status","Contractility, natriuretic peptide release"
+EDN1,Heart,Vascular_SMC,6.8,1.693,True,Vessel tone regulation,"Contractile tone, vascular remodeling"
+EDN1,Heart,Endothelial,12.5,3.112,True,"NO signaling, barrier function","Vasodilation, inflammation, permeability"
+EDN1,Heart,Fibroblasts,2.19,0.545,False,Unknown,Not characterized
+EDN1,Heart,Neuronal,0.68,0.169,False,Unknown,Not characterized
+EDN1,Heart,Immune_Cells,0.33,0.082,False,Unknown,Not characterized
+EDN1,Kidney,Podocytes,2.8,1.134,True,CKD link - albuminuria,"Filtration barrier, injury response"
+EDN1,Kidney,Proximal_Tubule,1.49,0.603,True,Salt/water reabsorption,"Sodium transport, volume regulation"
+EDN1,Kidney,Loop_of_Henle,0.23,0.093,True,Counter-current concentration,Water and electrolyte handling
+EDN1,Kidney,Distal_Tubule,1.29,0.522,True,Fine salt balance,Thiazide-sensitive NaCl transport
+EDN1,Kidney,Collecting_Duct,1.29,0.522,True,Final urine concentration,"Water reabsorption, aldosterone response"
+EDN1,Kidney,Endothelial,9.2,3.725,True,"NO signaling, barrier function","Vasodilation, inflammation, permeability"
+EDN1,Kidney,Immune_Cells,0.99,0.401,False,Unknown,Not characterized
+NOS3,Heart,Cardiomyocytes,0.43,0.123,True,"Heart function, volume status","Contractility, natriuretic peptide release"
+NOS3,Heart,Vascular_SMC,2.1,0.602,True,Vessel tone regulation,"Contractile tone, vascular remodeling"
+NOS3,Heart,Endothelial,15.8,4.529,True,"NO signaling, barrier function","Vasodilation, inflammation, permeability"
+NOS3,Heart,Fibroblasts,0.54,0.155,False,Unknown,Not characterized
+NOS3,Heart,Neuronal,1.18,0.338,False,Unknown,Not characterized
+NOS3,Heart,Immune_Cells,0.88,0.252,False,Unknown,Not characterized
+NOS3,Kidney,Podocytes,0.81,0.321,True,CKD link - albuminuria,"Filtration barrier, injury response"
+NOS3,Kidney,Proximal_Tubule,1.0,0.396,True,Salt/water reabsorption,"Sodium transport, volume regulation"
+NOS3,Kidney,Loop_of_Henle,0.66,0.261,True,Counter-current concentration,Water and electrolyte handling
+NOS3,Kidney,Distal_Tubule,0.84,0.332,True,Fine salt balance,Thiazide-sensitive NaCl transport
+NOS3,Kidney,Collecting_Duct,0.81,0.321,True,Final urine concentration,"Water reabsorption, aldosterone response"
+NOS3,Kidney,Endothelial,12.4,4.907,True,"NO signaling, barrier function","Vasodilation, inflammation, permeability"
+NOS3,Kidney,Immune_Cells,1.17,0.463,False,Unknown,Not characterized
+NPPA,Heart,Cardiomyocytes,45.2,5.705,True,"Heart function, volume status","Contractility, natriuretic peptide release"
+NPPA,Heart,Vascular_SMC,0.45,0.057,True,Vessel tone regulation,"Contractile tone, vascular remodeling"
+NPPA,Heart,Endothelial,0.59,0.074,True,"NO signaling, barrier function","Vasodilation, inflammation, permeability"
+NPPA,Heart,Fibroblasts,0.42,0.053,False,Unknown,Not characterized
+NPPA,Heart,Neuronal,0.65,0.082,False,Unknown,Not characterized
+NPPA,Heart,Immune_Cells,0.23,0.029,False,Unknown,Not characterized
+SHROOM3,Kidney,Podocytes,0.83,0.237,True,CKD link - albuminuria,"Filtration barrier, injury response"
+SHROOM3,Kidney,Proximal_Tubule,8.5,2.431,True,Salt/water reabsorption,"Sodium transport, volume regulation"
+SHROOM3,Kidney,Loop_of_Henle,1.35,0.386,True,Counter-current concentration,Water and electrolyte handling
+SHROOM3,Kidney,Distal_Tubule,6.8,1.944,True,Fine salt balance,Thiazide-sensitive NaCl transport
+SHROOM3,Kidney,Collecting_Duct,5.2,1.487,True,Final urine concentration,"Water reabsorption, aldosterone response"
+SHROOM3,Kidney,Endothelial,0.9,0.257,True,"NO signaling, barrier function","Vasodilation, inflammation, permeability"
+SHROOM3,Kidney,Immune_Cells,0.9,0.257,False,Unknown,Not characterized
+UMOD,Kidney,Podocytes,0.9,0.096,True,CKD link - albuminuria,"Filtration barrier, injury response"
+UMOD,Kidney,Proximal_Tubule,0.77,0.082,True,Salt/water reabsorption,"Sodium transport, volume regulation"
+UMOD,Kidney,Loop_of_Henle,52.8,5.655,True,Counter-current concentration,Water and electrolyte handling
+UMOD,Kidney,Distal_Tubule,8.5,0.91,True,Fine salt balance,Thiazide-sensitive NaCl transport
+UMOD,Kidney,Collecting_Duct,0.49,0.052,True,Final urine concentration,"Water reabsorption, aldosterone response"
+UMOD,Kidney,Endothelial,1.11,0.119,True,"NO signaling, barrier function","Vasodilation, inflammation, permeability"
+UMOD,Kidney,Immune_Cells,0.79,0.085,False,Unknown,Not characterized

@@ -1,0 +1,14 @@
+Gene,Trait1,Trait2,CHR,PPH4,Coloc_Support
+AGT,SBP,CAD,1,0.89,True
+ACE,SBP,CAD,17,0.82,True
+NOS3,SBP,CAD,7,0.76,True
+AGT,SBP,Stroke,1,0.85,True
+NPPA,SBP,Stroke,1,0.78,True
+EDN1,SBP,Stroke,6,0.72,True
+UMOD,SBP,CKD,16,0.91,True
+SHROOM3,SBP,CKD,4,0.84,True
+AGT,DBP,CAD,1,0.81,True
+ACE,DBP,CAD,17,0.75,True
+BDNF,SBP,Depression,9,0.68,False
+COMT,SBP,Depression,4,0.65,False
+DRD2,DBP,Depression,1,0.63,False

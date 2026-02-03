@@ -1,0 +1,8 @@
+Gene,Mechanism_Axis,CellType,Mechanism_Score,Axis_Description,Biological_Mechanism
+ACE,Vascular_Tone_Axis,Endothelial,2,Blood pressure regulation via vascular smooth muscle,Vasoconstriction/Vasodilation
+AGT,Vascular_Tone_Axis,Vascular_SMC,3,Blood pressure regulation via vascular smooth muscle,Vasoconstriction/Vasodilation
+EDN1,Vascular_Tone_Axis,Endothelial,2,Blood pressure regulation via vascular smooth muscle,Vasoconstriction/Vasodilation
+NOS3,Vascular_Tone_Axis,Endothelial,2,Blood pressure regulation via vascular smooth muscle,Vasoconstriction/Vasodilation
+NPPA,Cardiac_Natriuretic_Axis,Cardiomyocytes,3,Heart volume status and natriuretic peptides,"Volume regulation, NP signaling"
+SHROOM3,Renal_Salt_Axis,Proximal_Tubule,2,Salt/water balance and kidney function,"Na+ transport, Water handling"
+UMOD,Renal_Salt_Axis,Loop_of_Henle,3,Salt/water balance and kidney function,"Na+ transport, Water handling"

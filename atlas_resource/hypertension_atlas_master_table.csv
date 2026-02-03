@@ -1,0 +1,11 @@
+Gene,Disease,MR_Beta,PPH4,CellType,Tissue,Mechanism_Axis,Clinical_Risk_Link,Clinical_Intervention,Is_Top_Predictor,Priority_Score,Total_Influence
+ACE,CAD,0.35,0.82,Endothelial,Kidney,Vascular_Tone_Axis,Angiotensin II excess,"ACE inhibitors (Lisinopril, Enalapril)",True,3,0.0207
+AGT,CAD,0.42,0.89,Vascular_SMC,Heart,Vascular_Tone_Axis,RAAS hyperactivation,"ACE inhibitors, ARBs, Direct renin inhibitors",True,3,0.0524
+AGT,Stroke,0.38,0.85,Vascular_SMC,Heart,Vascular_Tone_Axis,RAAS hyperactivation,"ACE inhibitors, ARBs, Direct renin inhibitors",True,3,0.0524
+AGT,CKD,0.28,0.0,Vascular_SMC,Heart,Vascular_Tone_Axis,RAAS hyperactivation,"ACE inhibitors, ARBs, Direct renin inhibitors",True,3,0.0524
+EDN1,Stroke,0.32,0.72,Endothelial,Kidney,Vascular_Tone_Axis,Vasoconstriction,Endothelin receptor antagonists (rare),False,3,0.0119
+NOS3,CAD,0.28,0.76,Endothelial,Kidney,Vascular_Tone_Axis,Endothelial dysfunction,"Statins, Exercise, L-arginine",True,3,0.0247
+NOS3,Stroke,0.22,0.0,Endothelial,Kidney,Vascular_Tone_Axis,Endothelial dysfunction,"Statins, Exercise, L-arginine",True,3,0.0247
+NPPA,Stroke,0.25,0.78,Cardiomyocytes,Heart,Cardiac_Natriuretic_Axis,Volume overload,Neprilysin inhibitors (Sacubitril/Valsartan),False,3,0.0093
+SHROOM3,CKD,0.32,0.84,Proximal_Tubule,Kidney,Renal_Salt_Axis,Kidney function decline,"BP control <130/80, ACEi/ARB, SGLT2i",False,3,0.0153
+UMOD,CKD,0.45,0.91,Loop_of_Henle,Kidney,Renal_Salt_Axis,Salt-sensitive hypertension,"Low salt diet, Thiazide diuretics",False,3,0.0216

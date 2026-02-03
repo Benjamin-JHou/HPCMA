@@ -1,0 +1,8 @@
+Gene,Risk_Factor,Pathway,Clinical_Intervention,Evidence_Level,BP_Effect,Comorbidity_Benefit,Monitoring
+AGT,RAAS hyperactivation,Renin-Angiotensin-Aldosterone System,"ACE inhibitors, ARBs, Direct renin inhibitors",A (Multiple RCTs),↓ SBP 15-20 mmHg,"CAD↓, Stroke↓, CKD↓, HF↓","K+, Creatinine, BP"
+ACE,Angiotensin II excess,RAAS (ACE-AngII-AT1R),"ACE inhibitors (Lisinopril, Enalapril)",A (Standard of care),↓ SBP 15-20 mmHg,"CAD↓, Stroke↓, Diabetic nephropathy↓","Cough, Angioedema, K+"
+NOS3,Endothelial dysfunction,NO-cGMP signaling,"Statins, Exercise, L-arginine",B (Observational + some RCTs),↓ SBP 5-10 mmHg (indirect),"CAD↓, ED improvement, Arterial stiffness↓","LDL, Exercise tolerance"
+EDN1,Vasoconstriction,Endothelin signaling,Endothelin receptor antagonists (rare),C (Specialized use),↓ SBP 5-10 mmHg (special populations),"PAH treatment, Potential for resistant HTN","Liver enzymes, Fluid retention"
+NPPA,Volume overload,Natriuretic peptide system,Neprilysin inhibitors (Sacubitril/Valsartan),A (PARADIGM-HF trial),↓ SBP 5-10 mmHg,"HF↓, CV death↓, Hospitalization↓","BP, K+, Renal function"
+UMOD,Salt-sensitive hypertension,TAL Na-K-2Cl transport,"Low salt diet, Thiazide diuretics","B (DASH diet, RCTs)",↓ SBP 8-14 mmHg (salt restriction),"CKD progression↓, Kidney stone↓","Na+ intake, Urinary electrolytes"
+SHROOM3,Kidney function decline,Proximal tubule function,"BP control <130/80, ACEi/ARB, SGLT2i",A (KDIGO guidelines),↓ SBP 10-15 mmHg,"CKD progression↓, ESRD risk↓, CVD↓","eGFR, UACR, K+"
