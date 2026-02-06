@@ -2,8 +2,6 @@
 
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Nature Standards](https://img.shields.io/badge/Research%20Atlas-Nature%2FCell%20Standards-green.svg)](https://github.com/Benjamin-JHou/HPCMA)
-[![Clinical AI](https://img.shields.io/badge/Clinical%20Translation-AI%20Enabled-red.svg)](https://github.com/Benjamin-JHou/HPCMA)
 
 ## 🧬 Research Overview
 
