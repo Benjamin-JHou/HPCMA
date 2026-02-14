@@ -1,263 +1,88 @@
-# HPCMA Methods Supplement
+# HPCMA Methods Supplement (Resource-Paper Version)
 
-## Detailed Methodological Protocols
+## Scope and Intent
 
-This document provides comprehensive methodological details for the Hypertension Pan-Comorbidity Multi-Modal Atlas (HPCMA).
+This supplement documents the reproducibility and database-verifiable components used for the HPCMA resource manuscript. The objective is to provide an auditable computational resource (data snapshot, schema, query contracts, and reproducibility workflow), not to claim full rerun of all downstream experimental pipelines in this revision.
 
----
+## M1. Data Snapshot and Provenance
 
-## Table of Contents
+The resource is anchored by a fixed input snapshot and file-level provenance metadata.
 
-1. [Step 1: GWAS Harmonization & Quality Control](#step-1-gwas-harmonization--quality-control)
-2. [Step 2: Genetic Architecture Analysis](#step-2-genetic-architecture-analysis)
-3. [Step 3: Causal Gene Prioritization](#step-3-causal-gene-prioritization)
-4. [Step 4: Cell-Type Mapping](#step-4-cell-type-mapping)
-5. [Step 5: Multi-Modal Prediction Models](#step-5-multi-modal-prediction-models)
-6. [Step 6: Atlas Integration](#step-6-atlas-integration)
-7. [Step 7: Validation](#step-7-validation)
+- Primary provenance table: `docs/data_provenance_table.md`
+- Reproducibility manifest: `reproducibility/manifest.json`
+- Input checksum generator: `reproducibility/hash_inputs.py`
 
----
+The manifest records timestamp, pipeline version, input paths, and content hashes. These artifacts are used as the canonical traceability layer for reviewer inspection.
 
-## Step 1: GWAS Harmonization & Quality Control
+## M2. Atlas Database Build and Quality Controls
 
-### 1.1 Dataset Selection Criteria
+A relational packaging step materializes resource tables into SQLite for deterministic query and review.
 
-**Inclusion Criteria**:
-- Sample size > 10,000 individuals
-- European ancestry (95%+ for primary atlas)
-- Genome-wide coverage (>500,000 SNPs post-QC)
-- Published in peer-reviewed journal or established consortium
-- Available summary statistics
+- Schema definition: `database/schema.sql`
+- Build script: `database/build_db.py`
+- QC checks: `database/qc_checks.sql`
+- Query templates: `database/queries/*.sql`
 
-**Datasets Harmonized**:
-
-| Trait | Dataset ID | Source | N | Build |
-|-------|-----------|--------|---|-------|
-| SBP | UKB-IEU | UK Biobank | 317,754 | GRCh37 |
-| DBP | UKB-IEU | UK Biobank | 317,754 | GRCh37 |
-| PP | UKB-IEU | UK Biobank | 317,754 | GRCh37 |
-| CAD | CARDIoGRAM+C4D | Consortium | 184,305 | GRCh37 |
-| Stroke | MEGASTROKE | Consortium | 514,791 | GRCh37 |
-| CKD | CKDGen | Consortium | 117,480 | GRCh37 |
-| T2D | DIAGRAM | Consortium | 159,208 | GRCh37 |
-| Depression | PGC | Consortium | 500,199 | GRCh37 |
-| AD | IGAP | Consortium | 63,926 | GRCh37 |
-
-### 1.2 Harmonization Pipeline
+Build command:
 
 ```bash
-# Tool: GWAS Harmonization Pipeline v2.0
-# Reference: Haplotype Reference Consortium (HRC) panel
-
-# 1. Genome build alignment
-liftOver input.b37.gz hg19ToHg38.over.chain output.b38.gz
-
-# 2. Allele frequency harmonization
-# Match to 1000 Genomes EUR super-population
-# Exclude SNPs with AF difference > 0.20
-
-# 3. Effect allele standardization
-# Orient all effects to ALT allele
-# Require consistent allele coding
-
-# 4. Quality control filters
-# - Remove indels
-# - Remove SNPs with INFO < 0.8
-# - Remove palindromic SNPs (A/T, C/G)
-# - Remove SNPs with SE > 10
+python database/build_db.py
 ```
 
-### 1.3 Quality Control Metrics
+Post-build QC is executed against the generated SQLite artifact to ensure schema presence and table-level consistency required by manuscript tables/figures.
 
-**Per-Dataset QC**:
+## M3. Query Contract Validation
 
-```python
-# Minimum thresholds
-QC_CRITERIA = {
-    'sample_size': 10000,
-    'snp_count_post_qc': 500000,
-    'mean_se': 0.5,  # Maximum allowed
-    'lambda_gc': [0.95, 1.15],  # Acceptable range
-    'allele_missing_rate': 0.05  # Maximum
-}
+SQL outputs that support manuscript claims are validated through regression-style tests and fixed query templates.
 
-# All 11 datasets passed QC
-```
+- Query regression test: `tests/test_query_regression.py`
+- Expected output mapping: `docs/query_examples_expected_outputs.md`
+- Query templates:
+  - `database/queries/query_disease_network.sql`
+  - `database/queries/query_gene_profile.sql`
+  - `database/queries/query_celltype_links.sql`
 
----
+This contract-first pattern reduces drift between manuscript narrative and resource outputs.
 
-## Step 2: Genetic Architecture Analysis
+## M4. Reproducibility Manifest Workflow
 
-### 2.1 LD Score Regression
+An end-to-end reproducibility gate verifies artifact integrity and claim traceability.
 
-**Software**: LDSC v1.0.1
+- Driver: `reproducibility/run_all.sh`
+- Coverage tests:
+  - `tests/test_data_provenance.py`
+  - `tests/test_schema_integrity.py`
+  - `tests/test_claim_traceability.py`
+  - `tests/test_docs_claim_boundaries.py`
 
-**Command**:
+The workflow regenerates/validates manifest-bound artifacts and ensures cited resource outputs remain reproducible.
+
+## M5. Supplementary API Boundary
+
+The inference API included in this repository is a supplementary demonstration channel only.
+
+- API implementation: `src/inference/api_server.py`
+- Boundary checks: `tests/test_api_disclaimer.py`
+
+The API is explicitly labeled as non-clinical and non-deployment; it is not part of the core evidentiary chain for the resource paper.
+
+## M6. Out-of-Scope Elements in This Revision
+
+The following are intentionally not claimed as fully rerun evidence within this quick submission package:
+
+- Full empirical rerun of all step2-7 research pipelines on newly curated real-data cohorts.
+- Production or clinical deployment readiness of the supplementary API channel.
+
+These boundaries are enforced by repository documentation and test guards to avoid over-claiming.
+
+## M7. Verification Commands
+
 ```bash
-python ldsc.py \
-    --rg trait1.sumstats.gz,trait2.sumstats.gz \
-    --ref-ld-chr eur_w_ld_chr/ \
-    --w-ld-chr eur_w_ld_chr/ \
-    --out genetic_correlation \
-    --intercept-h2 \
-    --no-intercept-rg
+python -m pytest tests -q
+bash reproducibility/run_all.sh
 ```
 
-**Parameters**:
-- Reference panel: 1000 Genomes EUR
-- LD windows: 1 cM
-- Heritability model: BaselineLD v2.2
-
-### 2.2 Genetic Correlation Estimation
-
-**Significance Testing**:
-```python
-# Z-score calculation
-z = rg / se
-
-# Two-tailed p-value
-p = 2 * (1 - norm.cdf(abs(z)))
-
-# Multiple testing: Bonferroni correction
-n_tests = 55  # 11 traits choose 2
-alpha_corrected = 0.05 / n_tests
-```
-
-### 2.3 Cross-Trait Meta-Analysis
-
-**Method**: MT-COJO (Multi-Trait COnditional & JOint analysis)
-
-**Procedure**:
-1. Identify lead SNPs for each trait (p < 5e-8)
-2. Test for shared associations
-3. Calculate shared loci count per pair
-
----
-
-## Step 3: Causal Gene Prioritization
-
-### 3.1 Mendelian Randomization
-
-**Software**: TwoSampleMR v0.5.6 (R package)
-
-**Instrument Selection**:
-```r
-# Clumping parameters
-clump_r2 <- 0.01
-clump_kb <- 10000
-clump_p <- 5e-8
-
-# F-statistic threshold
-F_threshold <- 10
-
-# Instrument extraction
-instruments <- extract_instruments(
-    outcomes = exposure_id,
-    p1 = clump_p,
-    clump = TRUE,
-    r2 = clump_r2,
-    kb = clump_kb,
-    access_token = NULL
-)
-
-# F-statistic calculation
-F_stat <- (beta^2) / (se^2)
-instruments <- instruments[F_stat >= F_threshold, ]
-```
-
-**MR Methods**:
-
-1. **Inverse Variance Weighted (IVW)**
-   - Primary method for main estimates
-   - Assumes no pleiotropy or balanced pleiotropy
-
-2. **MR-Egger**
-   - Allows directional pleiotropy
-   - Test via intercept (should not differ from zero)
-
-3. **Weighted Median**
-   - Robust to 50% invalid instruments
-   - Used for sensitivity analysis
-
-4. **Weighted Mode**
-   - Uses mode of Wald ratios
-   - Assumes plurality valid
-
-**Sensitivity Analyses**:
-- Leave-one-out analysis
-- Funnel plot asymmetry assessment
-- MR-PRESSO outlier detection
-
-### 3.2 Colocalization Analysis
-
-**Software**: coloc v5.2.0 (R package)
-
-**Method**: Bayesian colocalization
-
-```r
-# Coloc analysis
-coloc_result <- coloc.abf(
-    dataset1 = list(
-        pvalues = pval_trait1,
-        N = sample_size_trait1,
-        beta = beta_trait1,
-        varbeta = se_trait1^2,
-        type = "quant"
-    ),
-    dataset2 = list(
-        pvalues = pval_trait2,
-        N = sample_size_trait2,
-        beta = beta_trait2,
-        varbeta = se_trait2^2,
-        type = "cc"  # case-control
-    ),
-    MAF = maf_vector,
-    p1 = 1e-4,   # Prior for trait1
-    p2 = 1e-4,   # Prior for trait2
-    p12 = 1e-5   # Prior for shared variant
-)
-
-# Interpretation
-PPH4 <- coloc_result$summary["PP.H4.abf"]
-# PPH4 > 0.75: High confidence shared causal variant
-# PPH4 0.5-0.75: Moderate confidence
-# PPH4 < 0.5: Low confidence
-```
-
-**Genomic Window**: ±100 kb around index SNP
-
-### 3.3 Evidence Integration
-
-**Priority Score Calculation**:
-
-```python
-def calculate_priority_score(gene):
-    score = 0
-    
-    # MR evidence (max 40 points)
-    if gene.has_significant_mr:
-        score += min(abs(gene.mr_beta) * 20, 40)
-    
-    # Colocalization evidence (max 30 points)
-    if gene.max_pph4 > 0.75:
-        score += 30
-    elif gene.max_pph4 > 0.5:
-        score += 20
-    elif gene.max_pph4 > 0.25:
-        score += 10
-    
-    # eQTL evidence (max 20 points)
-    if gene.has_eqtl_support:
-        score += 20
-    
-    # Biological plausibility (max 10 points)
-    if gene.in_pathway:
-        score += 10
-    
-    return score
-
-# Tier assignment
-# Tier 1: Score >= 80
+Successful execution of these commands constitutes the minimal reproducibility evidence set for this manuscript version.
 # Tier 2: Score 60-79
 # Tier 3: Score 40-59
 ```
