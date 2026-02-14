@@ -4,6 +4,8 @@
 
 This directory contains the core public resource tables from the Hypertension Pan-Comorbidity Multi-Modal Atlas (HPCMA). These tables are freely available for research use.
 
+Scope note: this atlas resource is intended for reproducible research reuse. Clinical deployment and patient-level decision support are out of scope for the primary resource release.
+
 ---
 
 ## 📊 Available Tables

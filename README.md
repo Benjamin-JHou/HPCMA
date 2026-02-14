@@ -114,9 +114,9 @@ Ensemble machine learning models combine all layers using **XGBoost** with **SHA
 
 ---
 
-## 🚀 Deployment-Ready Infrastructure
+## 🚀 Reproducible Infrastructure
 
-### Production API Server
+### Supplementary API Demonstration
 ```bash
 # Installation
 pip install -r requirements.txt
@@ -140,6 +140,11 @@ docker run -p 8000:8000 hpcma:latest
 - Code quality checks: Black, isort, flake8, mypy
 - Security scanning with Trivy
 - Coverage reporting via Codecov
+
+### Scope Boundary
+- This repository is presented as a reproducible research resource.
+- API-based risk scoring is a supplementary demonstration artifact.
+- No clinical deployment readiness claim is made in the primary resource narrative.
 
 ---
 
@@ -209,4 +214,3 @@ We welcome contributions from the research community! Please see [CONTRIBUTING.m
 ---
 
 **Maintained by**: Benjamin-JHou | **Version**: 1.0.0 | **Last Updated**: February 2025
-
