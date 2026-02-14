@@ -1,9 +1,11 @@
 import sqlite3
+import subprocess
 from pathlib import Path
 
 
 def test_gene_query_returns_stable_columns():
     assert Path("database/queries/query_gene_profile.sql").exists()
+    subprocess.run(["python3", "database/build_db.py"], check=True)
     con = sqlite3.connect("release/hpcma_atlas.sqlite")
     try:
         cur = con.execute("select * from gene_profile_view limit 1")
