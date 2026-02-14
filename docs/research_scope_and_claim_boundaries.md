@@ -25,3 +25,9 @@ This project is framed as a reproducible atlas resource for hypertension pan-com
 
 - Every manuscript claim must map to a specific table, script, and reproducibility record.
 - Simulated outputs must be isolated from real-data outputs and labeled explicitly.
+
+## Public Repository Curation Policy
+
+- Include only materials required for reproducibility and research reuse.
+- Exclude private manuscript drafting assets, teaching notebooks, and internal planning notes from Git tracking.
+- Keep canonical data interfaces in `atlas_resource/` with standardized `lower_snake_case` fields.

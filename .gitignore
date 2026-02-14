@@ -181,6 +181,18 @@ docker-compose.override.yml
 # Local release databases
 release/*.sqlite
 
+# Keep manuscript drafts and local teaching materials out of public repo scope
+paper/
+notebooks/
+tutorials/
+docs/plans/
+benchmark/
+deployment/
+README_GITHUB.md
+GITHUB_DESCRIPTION.md
+PROJECT_STATUS.md
+VALIDATION_WHITEPAPER.md
+
 # Secrets (NEVER commit these!)
 *.pem
 *.key

@@ -92,9 +92,9 @@ When using these tables:
 
 ## 🔗 Related Documentation
 
-- **Full Usage Guide**: See `../ATLAS_USAGE_GUIDE.md`
-- **Interactive Examples**: See `../notebooks/atlas_query_examples.ipynb`
-- **Validation Notes**: See `../VALIDATION_WHITEPAPER.md`
+- **Full Usage Guide**: `../ATLAS_USAGE_GUIDE.md`
+- **Reproducibility Scope**: `../docs/research_scope_and_claim_boundaries.md`
+- **Query Contracts**: `../docs/query_examples_expected_outputs.md`
 
 ---
 
