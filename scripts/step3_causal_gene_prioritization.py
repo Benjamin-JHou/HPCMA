@@ -34,17 +34,23 @@ def norm_cdf(x):
 
 # Setup directories
 DATA_DIR = 'data/step3'
-RESULTS_DIR = 'results'
-FIGURES_DIR = 'figures'
+# Output channeling: choose via OUTPUT_MODE env or wrapper --output-mode argument.
+OUTPUT_MODE = os.environ.get("OUTPUT_MODE", "synthetic_demo").strip()
+if OUTPUT_MODE not in {"real_data", "synthetic_demo"}:
+    raise ValueError("OUTPUT_MODE must be 'real_data' or 'synthetic_demo'")
+
+RESULTS_DIR = os.path.join("results", OUTPUT_MODE)
+FIGURES_DIR = os.path.join("figures", OUTPUT_MODE)
 EQTL_DIR = 'data/eqtl'
 
-for dir_path in [DATA_DIR, EQTL_DIR]:
+for dir_path in [DATA_DIR, EQTL_DIR, RESULTS_DIR, FIGURES_DIR]:
     os.makedirs(dir_path, exist_ok=True)
 
 print("="*80)
 print("STEP 3: CAUSAL GENE PRIORITIZATION")
 print("="*80)
 print(f"Timestamp: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+print(f"Output mode: {OUTPUT_MODE}")
 print()
 
 # ============================================================================
@@ -731,15 +737,15 @@ with open(f'{RESULTS_DIR}/step3_summary.txt', 'w') as f:
     f.write("OUTPUT FILES GENERATED:\n")
     f.write("-"*80 + "\n")
     output_files = [
-        'results/mr_causal_results.csv',
-        'results/mr_significant_pairs.csv',
-        'results/coloc_results.csv',
-        'results/eqtl_supported_genes.csv',
-        'results/prioritized_causal_genes.csv',
-        'results/step3_summary.txt',
-        'figures/mr_forest_top_pairs.png',
-        'figures/coloc_pph4_histogram.png',
-        'figures/prioritized_gene_tiers.png'
+        f"{RESULTS_DIR}/mr_causal_results.csv",
+        f"{RESULTS_DIR}/mr_significant_pairs.csv",
+        f"{RESULTS_DIR}/coloc_results.csv",
+        f"{RESULTS_DIR}/eqtl_supported_genes.csv",
+        f"{RESULTS_DIR}/prioritized_causal_genes.csv",
+        f"{RESULTS_DIR}/step3_summary.txt",
+        f"{FIGURES_DIR}/mr_forest_top_pairs.png",
+        f"{FIGURES_DIR}/coloc_pph4_histogram.png",
+        f"{FIGURES_DIR}/prioritized_gene_tiers.png",
     ]
     for fname in output_files:
         exists = os.path.exists(fname)
@@ -772,15 +778,15 @@ print(f"  - Total prioritized genes: {len(prioritized_df)}")
 
 print(f"\nGenerated Files:")
 required_files = [
-    'results/mr_causal_results.csv',
-    'results/mr_significant_pairs.csv',
-    'results/coloc_results.csv',
-    'results/eqtl_supported_genes.csv',
-    'results/prioritized_causal_genes.csv',
-    'figures/mr_forest_top_pairs.png',
-    'figures/coloc_pph4_histogram.png',
-    'figures/prioritized_gene_tiers.png',
-    'results/step3_summary.txt'
+    f"{RESULTS_DIR}/mr_causal_results.csv",
+    f"{RESULTS_DIR}/mr_significant_pairs.csv",
+    f"{RESULTS_DIR}/coloc_results.csv",
+    f"{RESULTS_DIR}/eqtl_supported_genes.csv",
+    f"{RESULTS_DIR}/prioritized_causal_genes.csv",
+    f"{FIGURES_DIR}/mr_forest_top_pairs.png",
+    f"{FIGURES_DIR}/coloc_pph4_histogram.png",
+    f"{FIGURES_DIR}/prioritized_gene_tiers.png",
+    f"{RESULTS_DIR}/step3_summary.txt",
 ]
 for fname in required_files:
     exists = os.path.exists(fname)

@@ -23,10 +23,21 @@ import seaborn as sns
 from collections import defaultdict
 import math
 
+# Output channeling: choose via OUTPUT_MODE env or wrapper --output-mode argument.
+OUTPUT_MODE = os.environ.get("OUTPUT_MODE", "synthetic_demo").strip()
+if OUTPUT_MODE not in {"real_data", "synthetic_demo"}:
+    raise ValueError("OUTPUT_MODE must be 'real_data' or 'synthetic_demo'")
+
+RESULTS_DIR = os.path.join("results", OUTPUT_MODE)
+FIGURES_DIR = os.path.join("figures", OUTPUT_MODE)
+os.makedirs(RESULTS_DIR, exist_ok=True)
+os.makedirs(FIGURES_DIR, exist_ok=True)
+
 print("="*80)
 print("STEP 7: ATLAS EXTERNAL VALIDATION + TRANSLATIONAL EVIDENCE")
 print("="*80)
 print(f"Timestamp: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+print(f"Output mode: {OUTPUT_MODE}")
 print()
 
 # ============================================================================
@@ -38,7 +49,7 @@ print("="*80)
 
 # Load Tier 1 genes
 try:
-    priority_df = pd.read_csv('results/prioritized_causal_genes.csv')
+    priority_df = pd.read_csv(f"{RESULTS_DIR}/prioritized_causal_genes.csv")
     tier1_genes = priority_df[priority_df['Tier'] == 'Tier_1']['Gene'].tolist()
 except:
     tier1_genes = ['ACE', 'AGT', 'EDN1', 'NOS3', 'NPPA', 'SHROOM3', 'UMOD']
@@ -47,8 +58,8 @@ print(f"✓ Loaded {len(tier1_genes)} Tier 1 genes: {', '.join(tier1_genes)}")
 
 # Load network data
 try:
-    network_edges = pd.read_csv('results/multilayer_network_edges.csv')
-    mechanism_df = pd.read_csv('results/mechanism_axis_clusters.csv')
+    network_edges = pd.read_csv(f"{RESULTS_DIR}/multilayer_network_edges.csv")
+    mechanism_df = pd.read_csv(f"{RESULTS_DIR}/mechanism_axis_clusters.csv")
 except:
     print("⚠ Using default network structure")
 
@@ -144,7 +155,7 @@ enrichment_results = {
 }
 
 enrichment_df = pd.DataFrame(enrichment_results)
-enrichment_df.to_csv('results/drug_target_enrichment_results.csv', index=False)
+enrichment_df.to_csv(f"{RESULTS_DIR}/drug_target_enrichment_results.csv", index=False)
 
 print(f"\n✓ Drug target enrichment calculated")
 print(f"  Tier 1 genes with approved drugs: {tier1_approved}/{tier1_total} ({tier1_approved/tier1_total*100:.1f}%)")
@@ -162,7 +173,7 @@ for gene in tier1_genes:
         if info.get('status') == 'Approved':
             print(f"    → Approved for: {', '.join(info.get('diseases', []))}")
 
-print(f"\n✓ Saved: results/drug_target_enrichment_results.csv")
+print(f"\n✓ Saved: {RESULTS_DIR}/drug_target_enrichment_results.csv")
 
 # ============================================================================
 # TASK 2: External PRS Validation
@@ -225,13 +236,13 @@ for cohort_name, params in cohorts.items():
     print(f"{cohort_name:<20} {params['n']:<8} {np.mean(prs_dist):.3f}      {np.std(prs_dist):.3f}    {mean_diff:.3f} ({shift_status})")
 
 prs_val_df = pd.DataFrame(prs_validation_results)
-prs_val_df.to_csv('results/external_validation_prs_shift_test.csv', index=False)
+prs_val_df.to_csv(f"{RESULTS_DIR}/external_validation_prs_shift_test.csv", index=False)
 
 print(f"\n✓ PRS validation complete")
 print(f"  Cohorts passing validation: {sum(1 for r in prs_validation_results if r['Validation_Status'] == 'PASS')}")
 print(f"  Total cohorts tested: {len(prs_validation_results) - 1}")  # Exclude reference
 
-print(f"\n✓ Saved: results/external_validation_prs_shift_test.csv")
+print(f"\n✓ Saved: {RESULTS_DIR}/external_validation_prs_shift_test.csv")
 
 # ============================================================================
 # TASK 3: Atlas Stability (Bootstrap)
@@ -293,7 +304,7 @@ for gene in tier1_genes:
     })
 
 stability_df = pd.DataFrame(stability_results)
-stability_df.to_csv('results/atlas_stability_bootstrap.csv', index=False)
+stability_df.to_csv(f"{RESULTS_DIR}/atlas_stability_bootstrap.csv", index=False)
 
 print("\n✓ Bootstrap analysis complete")
 print("\nGene Stability Scores (1000 bootstrap iterations):")
@@ -308,7 +319,7 @@ print(f"\nAverage gene stability: {avg_stability:.3f}")
 high_stable = sum(1 for r in stability_results if r['Bootstrap_Consistency'] > 0.95)
 print(f"Genes with high stability (>95%): {high_stable}/{len(stability_results)}")
 
-print(f"\n✓ Saved: results/atlas_stability_bootstrap.csv")
+print(f"\n✓ Saved: {RESULTS_DIR}/atlas_stability_bootstrap.csv")
 
 # ============================================================================
 # GENERATE FIGURES
@@ -364,9 +375,9 @@ ax2.set_xticks([0, 1])
 ax2.set_xticklabels(['No Approved Drug', 'Approved Target'])
 
 plt.tight_layout()
-plt.savefig('figures/drug_target_enrichment_plot.png', dpi=300, bbox_inches='tight')
+plt.savefig(f"{FIGURES_DIR}/drug_target_enrichment_plot.png", dpi=300, bbox_inches='tight')
 plt.close()
-print("  ✓ Saved: figures/drug_target_enrichment_plot.png")
+print(f"  ✓ Saved: {FIGURES_DIR}/drug_target_enrichment_plot.png")
 
 # Figure 2: Atlas Stability Plot
 print("\nFigure 2: Atlas Stability Plot...")
@@ -418,9 +429,9 @@ for i, (bar, status) in enumerate(zip(bars2, [r['Validation_Status'] for r in pr
                 fontsize=14, fontweight='bold', color=color)
 
 plt.tight_layout()
-plt.savefig('figures/atlas_stability_plot.png', dpi=300, bbox_inches='tight')
+plt.savefig(f"{FIGURES_DIR}/atlas_stability_plot.png", dpi=300, bbox_inches='tight')
 plt.close()
-print("  ✓ Saved: figures/atlas_stability_plot.png")
+print(f"  ✓ Saved: {FIGURES_DIR}/atlas_stability_plot.png")
 
 # ============================================================================
 # FINAL SUMMARY
@@ -453,11 +464,11 @@ print(f"   ✓ Genes with >95% stability: {high_stable_count}/{len(stability_res
 print("\n" + "="*80)
 print("OUTPUT FILES GENERATED:")
 print("="*80)
-print("  ✓ results/drug_target_enrichment_results.csv")
-print("  ✓ results/external_validation_prs_shift_test.csv")
-print("  ✓ results/atlas_stability_bootstrap.csv")
-print("  ✓ figures/drug_target_enrichment_plot.png")
-print("  ✓ figures/atlas_stability_plot.png")
+print(f"  ✓ {RESULTS_DIR}/drug_target_enrichment_results.csv")
+print(f"  ✓ {RESULTS_DIR}/external_validation_prs_shift_test.csv")
+print(f"  ✓ {RESULTS_DIR}/atlas_stability_bootstrap.csv")
+print(f"  ✓ {FIGURES_DIR}/drug_target_enrichment_plot.png")
+print(f"  ✓ {FIGURES_DIR}/atlas_stability_plot.png")
 
 print("\n" + "="*80)
 print("STEP 7 COMPLETE ✓")
