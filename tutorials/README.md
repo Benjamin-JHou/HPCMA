@@ -135,14 +135,14 @@ jupyter notebook
 # Pattern 1: Gene query
 import pandas as pd
 master = pd.read_csv('../atlas_resource/hypertension_atlas_master_table.csv')
-gene_data = master[master['Gene'] == 'ACE']
+gene_data = master[master['gene'] == 'ACE']
 
 # Pattern 2: Disease query
-disease_genes = master[master['Disease'] == 'CAD']
+disease_genes = master[master['disease'] == 'CAD']
 
 # Pattern 3: Cell type query
 cell_data = pd.read_csv('../atlas_resource/gene_disease_celltype_annotation.csv')
-cell_specific = cell_data[cell_data['CellType'] == 'Endothelial']
+cell_specific = cell_data[cell_data['cell_type'] == 'Endothelial']
 ```
 
 ---

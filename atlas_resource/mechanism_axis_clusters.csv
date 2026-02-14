@@ -1,4 +1,4 @@
-Gene,Mechanism_Axis,CellType,Mechanism_Score,Axis_Description,Biological_Mechanism
+gene,mechanism_axis,cell_type,mechanism_score,axis_description,biological_mechanism
 ACE,Vascular_Tone_Axis,Endothelial,2,Blood pressure regulation via vascular smooth muscle,Vasoconstriction/Vasodilation
 AGT,Vascular_Tone_Axis,Vascular_SMC,3,Blood pressure regulation via vascular smooth muscle,Vasoconstriction/Vasodilation
 EDN1,Vascular_Tone_Axis,Endothelial,2,Blood pressure regulation via vascular smooth muscle,Vasoconstriction/Vasodilation

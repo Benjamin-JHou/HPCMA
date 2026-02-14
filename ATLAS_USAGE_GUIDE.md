@@ -65,17 +65,17 @@ The Hypertension Pan-Comorbidity Multi-Modal Atlas is an integrated biological d
 import pandas as pd
 
 # Load the master atlas table
-master_df = pd.read_csv('results/hypertension_atlas_master_table.csv')
+master_df = pd.read_csv('atlas_resource/hypertension_atlas_master_table.csv')
 
 # Query for ACE gene
-ace_info = master_df[master_df['Gene'] == 'ACE']
+ace_info = master_df[master_df['gene'] == 'ACE']
 
 # Display results
 print("=== ACE Gene Atlas Information ===")
-print(f"Diseases associated: {ace_info['Disease'].unique()}")
-print(f"Cell types: {ace_info['CellType'].unique()}")
-print(f"Mechanism axis: {ace_info['Mechanism_Axis'].iloc[0]}")
-print(f"Clinical intervention: {ace_info['Clinical_Intervention'].iloc[0]}")
+print(f"Diseases associated: {ace_info['disease'].unique()}")
+print(f"Cell types: {ace_info['cell_type'].unique()}")
+print(f"Mechanism axis: {ace_info['mechanism_axis'].iloc[0]}")
+print(f"Clinical intervention: {ace_info['clinical_intervention'].iloc[0]}")
 ```
 
 **Expected Output:**
@@ -91,18 +91,18 @@ Clinical intervention: ACE inhibitors (e.g., Lisinopril)
 
 ```python
 # Load prioritized genes table
-genes_df = pd.read_csv('results/prioritized_causal_genes.csv')
+genes_df = pd.read_csv('atlas_resource/prioritized_causal_genes.csv')
 
 # Query specific gene
 gene_symbol = 'NOS3'  # Change to query different genes
-gene_details = genes_df[genes_df['Gene'] == gene_symbol].iloc[0]
+gene_details = genes_df[genes_df['gene'] == gene_symbol].iloc[0]
 
 print(f"=== {gene_symbol} Evidence Summary ===")
 print(f"Priority Tier: {gene_details['Tier']}")
 print(f"MR Support: {gene_details['MR_Support']}")
 print(f"Coloc Support: {gene_details['Coloc_Support']}")
 print(f"eQTL Support: {gene_details['eQTL_Support']}")
-print(f"Priority Score: {gene_details['Priority_Score']:.2f}")
+print(f"Priority Score: {gene_details['priority_score']:.2f}")
 print(f"Associated Traits: {gene_details['Associated_Traits']}")
 ```
 
@@ -110,16 +110,16 @@ print(f"Associated Traits: {gene_details['Associated_Traits']}")
 
 ```python
 # Load cell-type annotation table
-cell_df = pd.read_csv('results/gene_disease_celltype_annotation.csv')
+cell_df = pd.read_csv('atlas_resource/gene_disease_celltype_annotation.csv')
 
 # Find all genes expressed in endothelial cells
 endothelial_genes = cell_df[
-    (cell_df['CellType'] == 'Endothelial') & 
-    (cell_df['Is_Disease_Relevant'] == True)
+    (cell_df['cell_type'] == 'Endothelial') & 
+    (cell_df['is_disease_relevant'] == True)
 ]
 
 print(f"Disease-relevant genes in endothelial cells:")
-print(endothelial_genes['Gene'].unique())
+print(endothelial_genes['gene'].unique())
 print(f"\nMechanisms: {endothelial_genes['Mechanism'].unique()}")
 ```
 
@@ -137,36 +137,36 @@ print(f"\nMechanisms: {endothelial_genes['Mechanism'].unique()}")
 
 ```python
 # Load mechanism clusters
-mech_df = pd.read_csv('results/mechanism_axis_clusters.csv')
+mech_df = pd.read_csv('atlas_resource/mechanism_axis_clusters.csv')
 
 # Query by disease (encoded in mechanism axis description)
 disease = 'CAD'
 cad_mechanisms = mech_df[mech_df['Axis_Description'].str.contains(disease, case=False, na=False)]
 
 print(f"=== {disease} Mechanism Axis ===")
-print(f"Axis: {cad_mechanisms['Mechanism_Axis'].iloc[0]}")
+print(f"Axis: {cad_mechanisms['mechanism_axis'].iloc[0]}")
 print(f"Description: {cad_mechanisms['Axis_Description'].iloc[0]}")
-print(f"Key Genes: {', '.join(cad_mechanisms['Gene'].unique())}")
-print(f"Cell Types: {', '.join(cad_mechanisms['CellType'].unique())}")
+print(f"Key Genes: {', '.join(cad_mechanisms['gene'].unique())}")
+print(f"Cell Types: {', '.join(cad_mechanisms['cell_type'].unique())}")
 ```
 
 ### Example Query 5: Get All Genes for a Specific Disease
 
 ```python
 # Load master table
-master_df = pd.read_csv('results/hypertension_atlas_master_table.csv')
+master_df = pd.read_csv('atlas_resource/hypertension_atlas_master_table.csv')
 
 disease = 'CKD'
-disease_genes = master_df[master_df['Disease'] == disease]
+disease_genes = master_df[master_df['disease'] == disease]
 
 print(f"=== {disease}: Causal Genes & Cell Types ===")
 for _, row in disease_genes.iterrows():
-    print(f"Gene: {row['Gene']}")
-    print(f"  Cell Type: {row['CellType']}")
+    print(f"Gene: {row['gene']}")
+    print(f"  Cell Type: {row['cell_type']}")
     print(f"  Tissue: {row['Tissue']}")
-    print(f"  Mechanism: {row['Mechanism_Axis']}")
-    print(f"  MR Effect: {row['MR_Beta']:.3f}")
-    print(f"  Priority Score: {row['Priority_Score']:.1f}")
+    print(f"  Mechanism: {row['mechanism_axis']}")
+    print(f"  MR Effect: {row['mr_beta']:.3f}")
+    print(f"  Priority Score: {row['priority_score']:.1f}")
     print()
 ```
 
@@ -177,14 +177,14 @@ for _, row in disease_genes.iterrows():
 cross_df = pd.read_csv('results/cross_disease_gene_influence_score.csv')
 
 # Find genes that influence multiple diseases
-pleiotropic_genes = cross_df[cross_df['N_Diseases_Involved'] >= 3]
+pleiotropic_genes = cross_df[cross_df['n_diseases_involved'] >= 3]
 
 print("=== Pleiotropic Genes (3+ Diseases) ===")
 for _, gene in pleiotropic_genes.iterrows():
-    print(f"{gene['Gene']}: {gene['N_Diseases_Involved']} diseases")
-    print(f"  Top Cell Type: {gene['Top_CellType']}")
-    print(f"  Mechanism Axis: {gene['Mechanism_Axis']}")
-    print(f"  Influence Score: {gene['Total_Influence_Score']:.2f}")
+    print(f"{gene['gene']}: {gene['n_diseases_involved']} diseases")
+    print(f"  Top Cell Type: {gene['top_cell_type']}")
+    print(f"  Mechanism Axis: {gene['mechanism_axis']}")
+    print(f"  Influence Score: {gene['total_influence_score']:.2f}")
     print()
 ```
 
@@ -201,31 +201,31 @@ for _, gene in pleiotropic_genes.iterrows():
 ### Example Query 7: Explore Mechanism Axis
 
 ```python
-mech_df = pd.read_csv('results/mechanism_axis_clusters.csv')
+mech_df = pd.read_csv('atlas_resource/mechanism_axis_clusters.csv')
 
 axis_name = 'Vascular Tone Regulation'
-axis_genes = mech_df[mech_df['Mechanism_Axis'] == axis_name]
+axis_genes = mech_df[mech_df['mechanism_axis'] == axis_name]
 
 print(f"=== {axis_name} Mechanism Axis ===")
 print(f"Biological Mechanism: {axis_genes['Biological_Mechanism'].iloc[0]}")
 print(f"\nGenes in this axis:")
-for gene in axis_genes['Gene'].unique():
-    gene_data = axis_genes[axis_genes['Gene'] == gene].iloc[0]
-    print(f"  • {gene}: {gene_data['CellType']} (Score: {gene_data['Mechanism_Score']:.2f})")
+for gene in axis_genes['gene'].unique():
+    gene_data = axis_genes[axis_genes['gene'] == gene].iloc[0]
+    print(f"  • {gene}: {gene_data['cell_type']} (Score: {gene_data['mechanism_score']:.2f})")
 ```
 
 ### Example Query 8: Find Genes by Mechanism Score
 
 ```python
 # Find high-confidence mechanism genes
-high_confidence = mech_df[mech_df['Mechanism_Score'] > 0.8]
+high_confidence = mech_df[mech_df['mechanism_score'] > 0.8]
 
 print("=== High Confidence Mechanism Genes (Score > 0.8) ===")
-for axis in high_confidence['Mechanism_Axis'].unique():
-    axis_high = high_confidence[high_confidence['Mechanism_Axis'] == axis]
+for axis in high_confidence['mechanism_axis'].unique():
+    axis_high = high_confidence[high_confidence['mechanism_axis'] == axis]
     print(f"\n{axis}:")
     for _, row in axis_high.iterrows():
-        print(f"  {row['Gene']} ({row['CellType']}): {row['Mechanism_Score']:.2f}")
+        print(f"  {row['gene']} ({row['cell_type']}): {row['mechanism_score']:.2f}")
 ```
 
 ---
@@ -241,17 +241,17 @@ for axis in high_confidence['Mechanism_Axis'].unique():
 
 ```python
 # Load clinical translation table
-clinical_df = pd.read_csv('results/clinical_translation_table.csv')
+clinical_df = pd.read_csv('atlas_resource/clinical_translation_table.csv')
 
 gene = 'ACE'
-interventions = clinical_df[clinical_df['Gene'] == gene]
+interventions = clinical_df[clinical_df['gene'] == gene]
 
 print(f"=== Clinical Interventions for {gene} ===")
 for _, intervention in interventions.iterrows():
-    print(f"\nIntervention: {intervention['Clinical_Intervention']}")
-    print(f"  Risk Factor: {intervention['Risk_Factor']}")
+    print(f"\nIntervention: {intervention['clinical_intervention']}")
+    print(f"  Risk Factor: {intervention['risk_factor']}")
     print(f"  Pathway: {intervention['Pathway']}")
-    print(f"  Evidence Level: {intervention['Evidence_Level']}")
+    print(f"  Evidence Level: {intervention['evidence_level']}")
     print(f"  BP Effect: {intervention['BP_Effect']}")
     print(f"  Comorbidity Benefit: {intervention['Comorbidity_Benefit']}")
     print(f"  Monitoring: {intervention['Monitoring']}")
@@ -271,7 +271,7 @@ approved_targets = drug_df[
 
 print("=== Genes with Approved Drug Targets ===")
 for _, target in approved_targets.iterrows():
-    print(f"\nGene Set: {target['Gene_Set']}")
+    print(f"\nGene Set: {target['gene_set']}")
     print(f"  Approved Drug Targets: {target['Approved_Drug_Targets']}")
     print(f"  Enrichment Ratio: {target['Enrichment_Ratio']:.2f}")
     print(f"  P-value: {target['P_Value']:.2e}")
@@ -311,7 +311,7 @@ print(f"\nMMRS (Composite): {mmrs:.3f}")
 
 ```python
 # Load network edges
-network_df = pd.read_csv('results/multilayer_network_edges.csv')
+network_df = pd.read_csv('atlas_resource/multilayer_network_edges.csv')
 
 # Find hub genes (genes connected to multiple diseases)
 gene_connections = network_df[network_df['Layer'] == 'Gene_Disease'].groupby('Source').size()
@@ -343,7 +343,7 @@ strong_eqtl = eqtl_df[eqtl_df['eQTL_Support'] == True]
 
 print("=== Genes with eQTL Support (Expression Quantitative Trait Loci) ===")
 for _, gene in strong_eqtl.iterrows():
-    print(f"\n{gene['Gene']}:")
+    print(f"\n{gene['gene']}:")
     print(f"  Top SNP: {gene['Top_SNP']}")
     print(f"  eQTL P-value: {gene['eQTL_P']:.2e}")
     print(f"  Tissues: {gene['eQTL_Tissues']}")
@@ -360,15 +360,15 @@ For complete column definitions, see `atlas_data_dictionary.csv`
 
 | Column | Table(s) | Description |
 |--------|----------|-------------|
-| `Gene` | All | HGNC gene symbol |
-| `Disease` | Master | Target comorbidity (CAD/Stroke/CKD/T2D/Depression/AD) |
+| `gene` | All | HGNC gene symbol |
+| `disease` | Master | Target comorbidity (CAD/Stroke/CKD/T2D/Depression/AD) |
 | `Tier` | Prioritized | Evidence tier (1=high, 2=medium, 3=low) |
-| `MR_Beta` | Master | Mendelian randomization effect size |
-| `PPH4` | Master | Colocalization posterior probability |
-| `CellType` | Multiple | Disease-relevant cell type |
-| `Mechanism_Axis` | Multiple | Biological pathway category |
-| `Clinical_Intervention` | Clinical | Recommended intervention |
-| `Priority_Score` | Multiple | Composite evidence score |
+| `mr_beta` | Master | Mendelian randomization effect size |
+| `pph4` | Master | Colocalization posterior probability |
+| `cell_type` | Multiple | Disease-relevant cell type |
+| `mechanism_axis` | Multiple | Biological pathway category |
+| `clinical_intervention` | Clinical | Recommended intervention |
+| `priority_score` | Multiple | Composite evidence score |
 
 ---
 

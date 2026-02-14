@@ -27,6 +27,23 @@ import matplotlib.patches as mpatches
 import seaborn as sns
 from collections import defaultdict
 
+def _snake(name):
+    out = []
+    prev_alnum = False
+    for ch in str(name):
+        if ch.isupper() and prev_alnum:
+            out.append("_")
+        out.append(ch.lower())
+        prev_alnum = ch.islower() or ch.isdigit()
+    s = "".join(out).replace(" ", "_")
+    while "__" in s:
+        s = s.replace("__", "_")
+    return s.strip("_")
+
+
+def to_snake_columns(df):
+    return df.rename(columns={c: _snake(c) for c in df.columns})
+
 print("="*80)
 print("STEP 6: HYPERTENSION PAN-COMORBIDITY MULTI-MODAL ATLAS")
 print("="*80)
@@ -42,7 +59,8 @@ print("="*80)
 
 # Load Step 2 results - Genetic Correlation
 try:
-    gc_df = pd.read_csv('results/ldsc_genetic_correlation_matrix.csv')
+    gc_df = pd.read_csv('atlas_resource/ldsc_genetic_correlation_matrix.csv')
+    gc_df = gc_df.rename(columns={'trait1': 'Trait1', 'trait2': 'Trait2', 'se': 'SE'})
     print("✓ Step 2: Genetic correlation matrix loaded")
 except:
     print("⚠ Step 2 data not found - creating placeholder")
@@ -56,8 +74,21 @@ except:
 # Load Step 3 results - MR and Causal Genes
 try:
     mr_df = pd.read_csv('results/mr_significant_pairs.csv')
-    coloc_df = pd.read_csv('results/coloc_results.csv')
-    priority_df = pd.read_csv('results/prioritized_causal_genes.csv')
+    coloc_df = pd.read_csv('atlas_resource/coloc_results.csv')
+    priority_df = pd.read_csv('atlas_resource/prioritized_causal_genes.csv')
+    coloc_df = coloc_df.rename(columns={
+        'gene': 'Gene',
+        'trait1': 'Trait1',
+        'trait2': 'Trait2',
+        'chr': 'CHR',
+        'pph4': 'PPH4',
+        'coloc_support': 'Coloc_Support',
+    })
+    priority_df = priority_df.rename(columns={
+        'gene': 'Gene',
+        'priority_score': 'Priority_Score',
+        'tier': 'Tier',
+    })
     print("✓ Step 3: MR, Coloc, and Priority genes loaded")
 except:
     print("⚠ Step 3 data not found - creating placeholder")
@@ -183,7 +214,7 @@ for gene in tier1_genes:
 
 # Save network edges
 edges_df = pd.DataFrame(network_edges)
-edges_df.to_csv('results/multilayer_network_edges.csv', index=False)
+to_snake_columns(edges_df).to_csv('atlas_resource/multilayer_network_edges.csv', index=False)
 print(f"\n✓ Network edges: {len(network_edges)} connections")
 print(f"  Disease-Gene: {len([e for e in network_edges if e['Layer'] == 'Disease-Gene'])}")
 print(f"  Gene-Cell: {len([e for e in network_edges if e['Layer'] == 'Gene-Cell'])}")
@@ -299,7 +330,7 @@ for gene in tier1_genes:
             })
 
 axis_df = pd.DataFrame(axis_assignments)
-axis_df.to_csv('results/mechanism_axis_clusters.csv', index=False)
+to_snake_columns(axis_df).to_csv('atlas_resource/mechanism_axis_clusters.csv', index=False)
 
 print("\n✓ Mechanism axis clusters defined:")
 for axis_name, axis_info in mechanism_axes.items():
@@ -307,7 +338,7 @@ for axis_name, axis_info in mechanism_axes.items():
         print(f"  {axis_name}: {', '.join(axis_info['genes'])}")
         print(f"    → {axis_info['mechanism']}")
 
-print(f"\n✓ Saved: results/mechanism_axis_clusters.csv")
+print(f"\n✓ Saved: atlas_resource/mechanism_axis_clusters.csv")
 
 # ============================================================================
 # TASK 3: Cross-Disease Gene Influence Score
@@ -463,7 +494,7 @@ clinical_translations = [
 ]
 
 clinical_df = pd.DataFrame(clinical_translations)
-clinical_df.to_csv('results/clinical_translation_table.csv', index=False)
+to_snake_columns(clinical_df).to_csv('atlas_resource/clinical_translation_table.csv', index=False)
 
 print("\n✓ Clinical translation mapping complete")
 print("\nKey Clinical Interventions by Gene:")
@@ -472,7 +503,7 @@ for _, row in clinical_df.iterrows():
     print(f"    Interventions: {row['Clinical_Intervention']}")
     print(f"    BP Effect: {row['BP_Effect']}")
 
-print(f"\n✓ Saved: results/clinical_translation_table.csv")
+print(f"\n✓ Saved: atlas_resource/clinical_translation_table.csv")
 
 # ============================================================================
 # TASK 5: Atlas Master Table
@@ -534,7 +565,7 @@ for gene in tier1_genes:
         })
 
 master_df = pd.DataFrame(master_table_rows)
-master_df.to_csv('results/hypertension_atlas_master_table.csv', index=False)
+to_snake_columns(master_df).to_csv('atlas_resource/hypertension_atlas_master_table.csv', index=False)
 
 print(f"\n✓ Atlas master table generated")
 print(f"  Total entries: {len(master_df)}")
@@ -547,7 +578,7 @@ for disease in diseases:
     n_entries = len(master_df[master_df['Disease'] == disease])
     print(f"  {disease}: {n_entries} gene entries")
 
-print(f"\n✓ Saved: results/hypertension_atlas_master_table.csv")
+print(f"\n✓ Saved: atlas_resource/hypertension_atlas_master_table.csv")
 
 # ============================================================================
 # TASK 6: Generate Final Figures
@@ -865,12 +896,12 @@ with open('results/final_atlas_summary.txt', 'w') as f:
     f.write("ATLAS COMPONENTS:\n")
     f.write("-"*80 + "\n")
     components_summary = [
-        ('Multi-layer Network', 'results/multilayer_network_edges.csv'),
+        ('Multi-layer Network', 'atlas_resource/multilayer_network_edges.csv'),
         ('Node Attributes', 'results/network_node_attributes.csv'),
-        ('Mechanism Clusters', 'results/mechanism_axis_clusters.csv'),
+        ('Mechanism Clusters', 'atlas_resource/mechanism_axis_clusters.csv'),
         ('Gene Influence Scores', 'results/cross_disease_gene_influence_score.csv'),
-        ('Clinical Translation', 'results/clinical_translation_table.csv'),
-        ('Master Atlas Table', 'results/hypertension_atlas_master_table.csv'),
+        ('Clinical Translation', 'atlas_resource/clinical_translation_table.csv'),
+        ('Master Atlas Table', 'atlas_resource/hypertension_atlas_master_table.csv'),
         ('Network Visualization', 'figures/multilayer_network_graph.png'),
         ('Mechanism Flow', 'figures/mechanism_axis_sankey.png'),
         ('Gene Influence Plot', 'figures/gene_influence_barplot.png'),
@@ -924,12 +955,12 @@ print(f"\n" + "="*80)
 print("ATLAS COMPONENTS GENERATED:")
 print("="*80)
 for name, filepath in [
-    ('Network Edges', 'results/multilayer_network_edges.csv'),
+    ('Network Edges', 'atlas_resource/multilayer_network_edges.csv'),
     ('Node Attributes', 'results/network_node_attributes.csv'),
-    ('Mechanism Clusters', 'results/mechanism_axis_clusters.csv'),
+    ('Mechanism Clusters', 'atlas_resource/mechanism_axis_clusters.csv'),
     ('Gene Influence', 'results/cross_disease_gene_influence_score.csv'),
-    ('Clinical Translation', 'results/clinical_translation_table.csv'),
-    ('Master Table', 'results/hypertension_atlas_master_table.csv'),
+    ('Clinical Translation', 'atlas_resource/clinical_translation_table.csv'),
+    ('Master Table', 'atlas_resource/hypertension_atlas_master_table.csv'),
 ]:
     exists = "✓" if os.path.exists(filepath) else "✗"
     print(f"  {exists} {name}: {filepath}")

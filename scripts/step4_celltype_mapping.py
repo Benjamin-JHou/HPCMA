@@ -624,10 +624,20 @@ for _, row in spec_df.iterrows():
     })
 
 annot_df = pd.DataFrame(annotation_results)
-annot_df.to_csv(f'{RESULTS_DIR}/gene_disease_celltype_annotation.csv', index=False)
+annot_out = annot_df.rename(columns={
+    'Gene': 'gene',
+    'Tissue': 'tissue',
+    'CellType': 'cell_type',
+    'MeanExpr': 'mean_expr',
+    'Specificity_Score': 'specificity_score',
+    'Is_Disease_Relevant': 'is_disease_relevant',
+    'Disease_Role': 'disease_role',
+    'Mechanism': 'mechanism',
+})
+annot_out.to_csv('atlas_resource/gene_disease_celltype_annotation.csv', index=False)
 
 print(f"✓ Disease-relevant cell type mapping complete")
-print(f"  Saved: {RESULTS_DIR}/gene_disease_celltype_annotation.csv")
+print("  Saved: atlas_resource/gene_disease_celltype_annotation.csv")
 
 print(f"\nDisease-relevant gene-cell type pairs:")
 disease_relevant = annot_df[annot_df['Is_Disease_Relevant'] == True]
@@ -1003,7 +1013,7 @@ with open(f'{RESULTS_DIR}/step4_summary.txt', 'w') as f:
         'results/gene_tissue_specificity_tau.csv',
         'results/gene_celltype_expression_matrix.csv',
         'results/gene_celltype_specificity_scores.csv',
-        'results/gene_disease_celltype_annotation.csv',
+        'atlas_resource/gene_disease_celltype_annotation.csv',
         'results/final_celltype_mechanism_table.csv',
         'results/step4_summary.txt',
         'figures/gene_celltype_heatmap.png',
@@ -1044,7 +1054,7 @@ required_files = [
     'results/gene_tissue_specificity_tau.csv',
     'results/gene_celltype_expression_matrix.csv',
     'results/gene_celltype_specificity_scores.csv',
-    'results/gene_disease_celltype_annotation.csv',
+    'atlas_resource/gene_disease_celltype_annotation.csv',
     'results/final_celltype_mechanism_table.csv',
     'figures/gene_celltype_heatmap.png',
     'figures/gene_tau_barplot.png',

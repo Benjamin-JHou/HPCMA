@@ -1,4 +1,4 @@
-Gene,Risk_Factor,Pathway,Clinical_Intervention,Evidence_Level,BP_Effect,Comorbidity_Benefit,Monitoring
+gene,risk_factor,pathway,clinical_intervention,evidence_level,bp_effect,comorbidity_benefit,monitoring
 AGT,RAAS hyperactivation,Renin-Angiotensin-Aldosterone System,"ACE inhibitors, ARBs, Direct renin inhibitors",A (Multiple RCTs),↓ SBP 15-20 mmHg,"CAD↓, Stroke↓, CKD↓, HF↓","K+, Creatinine, BP"
 ACE,Angiotensin II excess,RAAS (ACE-AngII-AT1R),"ACE inhibitors (Lisinopril, Enalapril)",A (Standard of care),↓ SBP 15-20 mmHg,"CAD↓, Stroke↓, Diabetic nephropathy↓","Cough, Angioedema, K+"
 NOS3,Endothelial dysfunction,NO-cGMP signaling,"Statins, Exercise, L-arginine",B (Observational + some RCTs),↓ SBP 5-10 mmHg (indirect),"CAD↓, ED improvement, Arterial stiffness↓","LDL, Exercise tolerance"

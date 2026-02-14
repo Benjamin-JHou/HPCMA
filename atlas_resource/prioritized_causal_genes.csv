@@ -1,4 +1,4 @@
-Gene,MR_Support,Coloc_Support,eQTL_Support,Priority_Score,Tier,Associated_Traits,Top_eQTL_SNP,eQTL_Tissues
+gene,mr_support,coloc_support,e_qtl_support,priority_score,tier,associated_traits,top_e_qtl_snp,e_qtl_tissues
 ACE,1,1,1,3,Tier_1,SBP-CAD; DBP-CAD,rs4343,Whole_Blood
 AGT,1,1,1,3,Tier_1,SBP-CAD; SBP-Stroke; DBP-CAD,rs699,Whole_Blood
 EDN1,1,1,1,3,Tier_1,SBP-Stroke,rs5370,Whole_Blood

@@ -34,14 +34,14 @@ Scope note: this atlas resource is intended for reproducible research reuse. Cli
 
 Complete column definitions: See `../atlas_data_dictionary.csv`
 
-Quick reference:
-- **Gene**: HGNC gene symbol
-- **Disease**: CAD, Stroke, CKD, T2D, Depression, AD
-- **Tier**: 1 (high confidence), 2 (moderate), 3 (low)
-- **MR_Beta**: Mendelian randomization effect size
-- **PPH4**: Colocalization posterior probability
-- **CellType**: Disease-relevant cell population
-- **Mechanism_Axis**: Vascular Tone, Renal Salt, Cardiac Natriuretic
+Quick reference (global field standard: `lower_snake_case`):
+- **gene**: HGNC gene symbol
+- **disease**: CAD, Stroke, CKD, T2D, Depression, AD
+- **tier**: 1 (high confidence), 2 (moderate), 3 (low)
+- **mr_beta**: Mendelian randomization effect size
+- **pph4**: Colocalization posterior probability
+- **cell_type**: Disease-relevant cell population
+- **mechanism_axis**: Vascular Tone, Renal Salt, Cardiac Natriuretic
 
 ---
 
@@ -56,13 +56,13 @@ import pandas as pd
 master = pd.read_csv('hypertension_atlas_master_table.csv')
 
 # Query gene
-ace_data = master[master['Gene'] == 'ACE']
+ace_data = master[master['gene'] == 'ACE']
 
 # Query disease
-cad_genes = master[master['Disease'] == 'CAD']
+cad_genes = master[master['disease'] == 'CAD']
 
 # Query mechanism axis
-vascular = master[master['Mechanism_Axis'] == 'Vascular Tone Regulation']
+vascular = master[master['mechanism_axis'] == 'Vascular Tone Regulation']
 ```
 
 ### Atlas Statistics

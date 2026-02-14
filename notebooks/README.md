@@ -22,11 +22,11 @@ Comprehensive tutorial covering:
 import pandas as pd
 
 # Master table: Gene → Disease → Cell Type
-master_df = pd.read_csv('../results/hypertension_atlas_master_table.csv')
+master_df = pd.read_csv('../atlas_resource/hypertension_atlas_master_table.csv')
 
 # Query example: Find all information for ACE gene
-ace_data = master_df[master_df['Gene'] == 'ACE']
-print(ace_data[['Disease', 'CellType', 'Mechanism_Axis', 'Clinical_Intervention']])
+ace_data = master_df[master_df['gene'] == 'ACE']
+print(ace_data[['disease', 'cell_type', 'mechanism_axis', 'clinical_intervention']])
 ```
 
 ## 📖 Documentation
@@ -40,19 +40,19 @@ print(ace_data[['Disease', 'CellType', 'Mechanism_Axis', 'Clinical_Intervention'
 ### Query by Gene
 ```python
 gene = 'NOS3'
-gene_info = master_df[master_df['Gene'] == gene]
+gene_info = master_df[master_df['gene'] == gene]
 ```
 
 ### Query by Disease
 ```python
 disease = 'CKD'
-disease_genes = master_df[master_df['Disease'] == disease]
+disease_genes = master_df[master_df['disease'] == disease]
 ```
 
 ### Query by Cell Type
 ```python
-cell_df = pd.read_csv('../results/gene_disease_celltype_annotation.csv')
-endothelial = cell_df[cell_df['CellType'] == 'Endothelial']
+cell_df = pd.read_csv('../atlas_resource/gene_disease_celltype_annotation.csv')
+endothelial = cell_df[cell_df['cell_type'] == 'Endothelial']
 ```
 
 ## 🎓 Citation

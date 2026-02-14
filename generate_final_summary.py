@@ -151,22 +151,22 @@ print("DATA TABLES (CSV):")
 print("-" * 80)
 categories = {
     'Genetic Architecture': [
-        'results/ldsc_genetic_correlation_matrix.csv',
+        'atlas_resource/ldsc_genetic_correlation_matrix.csv',
         'results/shared_significant_snp_overlap.csv',
         'results/shared_independent_loci.csv'
     ],
     'Causal Genes': [
         'results/mr_causal_results.csv',
         'results/mr_significant_pairs.csv',
-        'results/coloc_results.csv',
+        'atlas_resource/coloc_results.csv',
         'results/eqtl_supported_genes.csv',
-        'results/prioritized_causal_genes.csv'
+        'atlas_resource/prioritized_causal_genes.csv'
     ],
     'Cell Type Mapping': [
         'results/gene_tissue_specificity_tau.csv',
         'results/gene_celltype_expression_matrix.csv',
         'results/gene_celltype_specificity_scores.csv',
-        'results/gene_disease_celltype_annotation.csv',
+        'atlas_resource/gene_disease_celltype_annotation.csv',
         'results/final_celltype_mechanism_table.csv'
     ],
     'Prediction Models': [
@@ -177,12 +177,12 @@ categories = {
         'results/multimodal_risk_score.csv'
     ],
     'Final Atlas': [
-        'results/multilayer_network_edges.csv',
+        'atlas_resource/multilayer_network_edges.csv',
         'results/network_node_attributes.csv',
-        'results/mechanism_axis_clusters.csv',
+        'atlas_resource/mechanism_axis_clusters.csv',
         'results/cross_disease_gene_influence_score.csv',
-        'results/clinical_translation_table.csv',
-        'results/hypertension_atlas_master_table.csv'
+        'atlas_resource/clinical_translation_table.csv',
+        'atlas_resource/hypertension_atlas_master_table.csv'
     ],
     'Validation': [
         'results/drug_target_enrichment_results.csv',

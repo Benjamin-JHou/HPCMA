@@ -1,4 +1,4 @@
-Gene,Tissue,CellType,MeanExpr,Specificity_Score,Is_Disease_Relevant,Disease_Role,Mechanism
+gene,tissue,cell_type,mean_expr,specificity_score,is_disease_relevant,disease_role,mechanism
 ACE,Heart,Cardiomyocytes,4.8,1.206,True,"Heart function, volume status","Contractility, natriuretic peptide release"
 ACE,Heart,Vascular_SMC,8.5,2.135,True,Vessel tone regulation,"Contractile tone, vascular remodeling"
 ACE,Heart,Endothelial,7.2,1.808,True,"NO signaling, barrier function","Vasodilation, inflammation, permeability"

@@ -1,4 +1,4 @@
-Gene,Trait1,Trait2,CHR,PPH4,Coloc_Support
+gene,trait1,trait2,chr,pph4,coloc_support
 AGT,SBP,CAD,1,0.89,True
 ACE,SBP,CAD,17,0.82,True
 NOS3,SBP,CAD,7,0.76,True

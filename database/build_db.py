@@ -53,10 +53,17 @@ def build() -> None:
         reader = csv.DictReader(f)
         rows = list(reader)
 
+    def read_value(row: dict, *keys: str) -> str:
+        for key in keys:
+            value = row.get(key)
+            if value not in (None, ""):
+                return str(value).strip()
+        return ""
+
     for row in rows:
-        gene = row.get("Gene", "").strip()
-        disease = row.get("Disease", "").strip()
-        celltype = row.get("CellType", "").strip()
+        gene = read_value(row, "gene", "Gene")
+        disease = read_value(row, "disease", "Disease")
+        celltype = read_value(row, "cell_type", "CellType")
 
         if gene and gene not in gene_map:
             cur = conn.execute("INSERT INTO genes(symbol) VALUES (?)", (gene,))
@@ -71,9 +78,9 @@ def build() -> None:
             celltype_map[celltype] = cur.lastrowid
 
     for row in rows:
-        gene = row.get("Gene", "").strip()
-        disease = row.get("Disease", "").strip()
-        celltype = row.get("CellType", "").strip()
+        gene = read_value(row, "gene", "Gene")
+        disease = read_value(row, "disease", "Disease")
+        celltype = read_value(row, "cell_type", "CellType")
 
         if not gene or not disease:
             continue
@@ -100,12 +107,12 @@ def build() -> None:
                 gene_id,
                 disease_id,
                 cell_type_id,
-                to_float(row.get("MR_Beta")),
-                to_float(row.get("PPH4")),
-                row.get("Mechanism_Axis", "").strip() or None,
-                row.get("Clinical_Intervention", "").strip() or None,
-                to_float(row.get("Priority_Score")),
-                to_float(row.get("Total_Influence")),
+                to_float(read_value(row, "mr_beta", "MR_Beta")),
+                to_float(read_value(row, "pph4", "PPH4")),
+                read_value(row, "mechanism_axis", "Mechanism_Axis") or None,
+                read_value(row, "clinical_intervention", "Clinical_Intervention") or None,
+                to_float(read_value(row, "priority_score", "Priority_Score")),
+                to_float(read_value(row, "total_influence", "Total_Influence")),
                 "MR+coloc+atlas",
                 source_id,
             ),

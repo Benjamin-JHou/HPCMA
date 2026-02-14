@@ -1,4 +1,4 @@
-Layer,Source,Target,Weight,MR_Beta,PPH4,Evidence_Type,CellType,Tissue,Specificity,Tau
+layer,source,target,weight,mr_beta,pph4,evidence_type,cell_type,tissue,specificity,tau
 Disease-Gene,CAD,ACE,0.287,0.35,0.82,MR+Coloc,,,,
 Disease-Gene,CAD,AGT,0.3738,0.42,0.89,MR+Coloc,,,,
 Disease-Gene,Stroke,AGT,0.323,0.38,0.85,MR+Coloc,,,,
