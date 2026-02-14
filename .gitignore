@@ -175,6 +175,9 @@ Thumbs.db
 .dockerignore
 docker-compose.override.yml
 
+# Git worktrees
+.worktrees/
+
 # Secrets (NEVER commit these!)
 *.pem
 *.key
