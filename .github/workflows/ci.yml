@@ -43,24 +43,28 @@ jobs:
     
     - name: Check code formatting with Black
       run: |
-        black --check src/ tests/ || true
+        black --check src/ tests/
     
     - name: Check import sorting with isort
       run: |
-        isort --check-only src/ tests/ || true
+        isort --check-only src/ tests/
     
     - name: Lint with flake8
       run: |
-        flake8 src/ tests/ --count --select=E9,F63,F7,F82 --show-source --statistics || true
-        flake8 src/ tests/ --count --exit-zero --max-complexity=10 --max-line-length=120 --statistics || true
+        flake8 src/ tests/ --count --select=E9,F63,F7,F82 --show-source --statistics
+        flake8 src/ tests/ --count --max-complexity=10 --max-line-length=120 --statistics
     
     - name: Type check with mypy
       run: |
-        mypy src/ --ignore-missing-imports || true
+        mypy src/ --ignore-missing-imports
     
     - name: Run tests with pytest
       run: |
-        pytest tests/ -v --cov=src --cov-report=xml --cov-report=html || true
+        pytest tests/ -v --cov=src --cov-report=xml --cov-report=html
+
+    - name: Validate database build and query contract
+      run: |
+        bash scripts/ci_validate_database.sh
     
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v4
