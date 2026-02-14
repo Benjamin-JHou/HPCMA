@@ -178,6 +178,9 @@ docker-compose.override.yml
 # Git worktrees
 .worktrees/
 
+# Local release databases
+release/*.sqlite
+
 # Secrets (NEVER commit these!)
 *.pem
 *.key
