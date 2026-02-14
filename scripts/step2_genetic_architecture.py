@@ -35,8 +35,13 @@ def hypergeom_sf(k, M, n, N):
     return 1e-100 if k > n * N / M else 0.5
 
 # Setup
-RESULTS_DIR = 'results'
-FIGURES_DIR = 'figures'
+# Output channeling: choose via OUTPUT_MODE env or wrapper --output-mode argument.
+OUTPUT_MODE = os.environ.get("OUTPUT_MODE", "synthetic_demo").strip()
+if OUTPUT_MODE not in {"real_data", "synthetic_demo"}:
+    raise ValueError("OUTPUT_MODE must be 'real_data' or 'synthetic_demo'")
+
+RESULTS_DIR = os.path.join("results", OUTPUT_MODE)
+FIGURES_DIR = os.path.join("figures", OUTPUT_MODE)
 HARMONIZED_DIR = 'data/harmonized'
 
 os.makedirs(RESULTS_DIR, exist_ok=True)
@@ -46,6 +51,7 @@ print("="*80)
 print("STEP 2: GENETIC SHARED ARCHITECTURE")
 print("="*80)
 print(f"Timestamp: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+print(f"Output mode: {OUTPUT_MODE}")
 print()
 
 # ============================================================================

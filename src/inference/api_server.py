@@ -1,6 +1,10 @@
 """
 FastAPI Inference Server for Hypertension Comorbidity Risk Prediction
-Production-ready REST API for real-time risk scoring
+Supplementary REST API for reproducibility demonstrations
+
+IMPORTANT: This service is a supplementary demonstration only artifact for
+research reproducibility support. It is not intended for clinical deployment
+or patient-level decision-making.
 """
 
 from fastapi import FastAPI, HTTPException, status
@@ -30,6 +34,8 @@ app = FastAPI(
     docs_url="/docs",
     redoc_url="/redoc"
 )
+
+API_USE_SCOPE = "supplementary_demonstration_only"
 
 # CORS middleware
 # SECURITY NOTE: In production, replace ["*"] with specific allowed origins
@@ -259,17 +265,18 @@ def get_clinical_actions(individual_risks: Dict[str, RiskPrediction]) -> Dict[st
 
 @app.get("/", response_model=Dict)
 async def root():
-    """API root endpoint"""
+    """API root endpoint (demonstration only)."""
     return {
         "message": "MMRP Clinical AI API",
         "version": "1.0.0",
+        "use_scope": API_USE_SCOPE,
         "docs": "/docs",
         "health": "/health"
     }
 
 @app.get("/health", response_model=HealthCheck)
 async def health_check():
-    """Health check endpoint"""
+    """Health check endpoint for demonstration server status."""
     return HealthCheck(
         status="healthy",
         version="1.0.0",
@@ -280,9 +287,9 @@ async def health_check():
 @app.post("/predict", response_model=PredictionResponse)
 async def predict(features: PatientFeatures, patient_id: Optional[str] = None):
     """
-    Predict comorbidity risks for a single patient
+    Predict comorbidity risks for a single patient (demonstration only).
     
-    Returns individual disease risks, MMRS score, and clinical recommendations
+    Returns synthetic risk outputs for reproducibility demos.
     """
     try:
         logger.info(f"Processing prediction request for patient: {patient_id or 'anonymous'}")
@@ -326,9 +333,9 @@ async def predict(features: PatientFeatures, patient_id: Optional[str] = None):
 @app.post("/predict/batch", response_model=List[PredictionResponse])
 async def predict_batch(request: BatchPredictionRequest):
     """
-    Batch prediction for multiple patients
+    Batch prediction for multiple patients (demonstration only).
     
-    Efficiently processes multiple patients in one request
+    Efficiently processes multiple patients in one request for demo workflows.
     """
     try:
         logger.info(f"Processing batch prediction for {len(request.patients)} patients")
@@ -353,9 +360,10 @@ async def predict_batch(request: BatchPredictionRequest):
 
 @app.get("/models/info")
 async def get_model_info():
-    """Get information about loaded models"""
+    """Get information about loaded models and demonstration scope."""
     return {
         "version": "1.0.0",
+        "use_scope": API_USE_SCOPE,
         "models_loaded": len(model_config) > 0,
         "diseases": ['CAD', 'Stroke', 'CKD', 'T2D', 'Depression', 'AD'],
         "features": [

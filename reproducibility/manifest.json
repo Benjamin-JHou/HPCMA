@@ -1,0 +1,25 @@
+{
+  "generated_at": "2026-02-14T11:05:20.099153+00:00",
+  "pipeline_version": "1.0.0",
+  "inputs": [
+    "atlas_resource/hypertension_atlas_master_table.csv",
+    "atlas_resource/prioritized_causal_genes.csv",
+    "atlas_resource/gene_disease_celltype_annotation.csv",
+    "atlas_resource/clinical_translation_table.csv",
+    "atlas_resource/mechanism_axis_clusters.csv",
+    "atlas_resource/multilayer_network_edges.csv"
+  ],
+  "checksums": {
+    "atlas_resource/hypertension_atlas_master_table.csv": "a2332a8db7101a62e410537ea59ece37f2b22dd9761668283facc88b7d218b79",
+    "atlas_resource/prioritized_causal_genes.csv": "8ef370a7f35e10d4e20bf542a1c11ba80e7c74343634aec10deb86624c6396e8",
+    "atlas_resource/gene_disease_celltype_annotation.csv": "8c54e0e6030c7e9b3ed5e83d57fb2557e3abc9d330617ca519c71b6f4b1ac261",
+    "atlas_resource/clinical_translation_table.csv": "16b4c32eec5a5c9efe2c24413f23af659095ebefef37bd381e5e7125e797e8e8",
+    "atlas_resource/mechanism_axis_clusters.csv": "1f85638ff583ea1224c8435a203e36cfe85f5f5875f2879bfdd60f692cb5fa7a",
+    "atlas_resource/multilayer_network_edges.csv": "334959309191cd83fb632076062d01c54a98228730f83067487a68fce7153111"
+  },
+  "run_parameters": {
+    "output_mode": "real_data",
+    "database_builder": "database/build_db.py",
+    "schema": "database/schema.sql"
+  }
+}

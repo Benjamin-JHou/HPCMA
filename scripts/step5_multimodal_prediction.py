@@ -26,16 +26,22 @@ def norm_cdf(x):
 
 # Setup directories
 DATA_DIR = 'data/step5'
-RESULTS_DIR = 'results'
-FIGURES_DIR = 'figures'
+# Output channeling: choose via OUTPUT_MODE env or wrapper --output-mode argument.
+OUTPUT_MODE = os.environ.get("OUTPUT_MODE", "synthetic_demo").strip()
+if OUTPUT_MODE not in {"real_data", "synthetic_demo"}:
+    raise ValueError("OUTPUT_MODE must be 'real_data' or 'synthetic_demo'")
 
-for dir_path in [DATA_DIR]:
+RESULTS_DIR = os.path.join("results", OUTPUT_MODE)
+FIGURES_DIR = os.path.join("figures", OUTPUT_MODE)
+
+for dir_path in [DATA_DIR, RESULTS_DIR, FIGURES_DIR]:
     os.makedirs(dir_path, exist_ok=True)
 
 print("="*80)
 print("STEP 5: MULTI-MODAL COMORBIDITY PREDICTION MODELS")
 print("="*80)
 print(f"Timestamp: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+print(f"Output mode: {OUTPUT_MODE}")
 print()
 
 # Target diseases
@@ -594,19 +600,19 @@ with open(f'{RESULTS_DIR}/step5_summary.txt', 'w') as f:
     for fname in ['prs_scores_per_trait.csv', 'final_feature_matrix.csv', 
                   'model_performance_summary.csv', 'feature_importance_all_models.csv',
                   'multimodal_risk_score.csv', 'step5_summary.txt']:
-        exists = os.path.exists(f'results/{fname}')
+        exists = os.path.exists(f'{RESULTS_DIR}/{fname}')
         f.write(f"  {'✓' if exists else '✗'} {fname}\n")
     
     for fname in ['model_roc_curves.png', 'feature_importance_barplot.png',
                   'shap_summary.png', 'risk_stratification_plot.png']:
-        exists = os.path.exists(f'figures/{fname}')
-        f.write(f"  {'✓' if exists else '✗'} figures/{fname}\n")
+        exists = os.path.exists(f'{FIGURES_DIR}/{fname}')
+        f.write(f"  {'✓' if exists else '✗'} {FIGURES_DIR}/{fname}\n")
     
     f.write("\n" + "="*80 + "\n")
     f.write("STATUS: " + ("COMPLETE" if not stop_execution else "FAILED QC") + "\n")
     f.write("="*80 + "\n")
 
-print(f"\n✓ Summary saved: results/step5_summary.txt")
+print(f"\n✓ Summary saved: {RESULTS_DIR}/step5_summary.txt")
 
 # ============================================================================
 # FINAL SUMMARY
