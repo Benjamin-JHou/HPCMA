@@ -24,6 +24,7 @@ class TestHealthEndpoints:
         data = response.json()
         assert "MMRP Clinical AI API" in data["message"]
         assert data["version"] == "1.0.0"
+        assert data["use_scope"] == "supplementary_demonstration_only"
     
     def test_health_check(self):
         """Test health check endpoint"""
@@ -38,6 +39,7 @@ class TestHealthEndpoints:
         response = client.get("/models/info")
         assert response.status_code == 200
         data = response.json()
+        assert data["use_scope"] == "supplementary_demonstration_only"
         assert "diseases" in data
         assert len(data["diseases"]) == 6
         assert "features" in data
